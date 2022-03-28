@@ -1,8 +1,9 @@
 import React from 'react';
 import type { NextPage } from 'next';
+import Header from '../components/Layout/Header';
 
 const Home: NextPage = () => (
-  <h1 style={{ fontWeight: 900 }}>init</h1>
+  <Header />
 );
 
 export default Home;
