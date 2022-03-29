@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 import {
-  Flex, Box, Image, ChakraProps, OmitCommonProps,
+  Flex, Box, ChakraProps, OmitCommonProps, HStack, Image,
 } from '@chakra-ui/react';
 import NavItem from './NavItem';
+import Logo from '../../UI/Logo';
 
 // eslint-disable-next-line react/require-default-props
 const SideContent = (props: JSX.IntrinsicAttributes & OmitCommonProps<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, keyof ChakraProps> & ChakraProps & { as?: 'div' | undefined; }): JSX.Element => (
@@ -14,9 +15,10 @@ const SideContent = (props: JSX.IntrinsicAttributes & OmitCommonProps<React.Deta
     left="0"
     h="full"
     pb="10"
+    py="1.2em"
     overflowX="hidden"
     overflowY="auto"
-    bg="yellow.700"
+    bg="#d4db95"
     borderColor="blackAlpha.300"
     borderRightWidth="1px"
     w="60"
@@ -33,36 +35,51 @@ const SideContent = (props: JSX.IntrinsicAttributes & OmitCommonProps<React.Deta
     }}
   >
 
-    <Flex px="4" py="5" align="center">
-      <Image
-        w="60%"
-        h="60%"
-        fit="fill"
-        src="/images/logo/logo_artcom3.png"
-        alt="ArtCom Logo"
-        loading="lazy"
-      />
-
+    <Flex w="full" alignItems="center" justifyContent="center">
+      <Flex w={{ base: '100px', xl: '150px' }} h={{ base: '100px', xl: '150px' }} ml="0.5em">
+        <Logo />
+      </Flex>
     </Flex>
     <Flex
       direction="column"
       as="nav"
-      fontSize={['sm', 'md', 'lg', 'xl']}
-      color="yellow.700"
+      fontSize="xl"
+      color="#fff"
       aria-label="Main Navigation"
+      mt="15px"
     >
       <Link href="/" passHref>
-        <NavItem>Home</NavItem>
+        <NavItem>Página Inicial</NavItem>
       </Link>
       <Link href="/about" passHref>
-        <NavItem>Sobre</NavItem>
+        <NavItem>Quem somos</NavItem>
       </Link>
       <Link href="/works" passHref>
-        <NavItem>Trabalhos</NavItem>
+        <NavItem>Produtos</NavItem>
       </Link>
       <Link href="/contact" passHref>
         <NavItem>Contato</NavItem>
       </Link>
+    </Flex>
+    <Flex w="100%" justifyContent="center" mt="15px">
+      <HStack spacing={2}>
+        <a href="/">
+          <Image
+            src="/images/svgs/whatsapp.svg"
+            w={{ base: '30px', xl: '40px' }}
+            h={{ base: '30px', xl: '40px' }}
+            alt="Whatsapp logo"
+          />
+        </a>
+        <a href="/">
+          <Image
+            src="/images/svgs/instagram.svg"
+            w={{ base: '30px', xl: '40px' }}
+            h={{ base: '30px', xl: '40px' }}
+            alt="Instagram logo"
+          />
+        </a>
+      </HStack>
     </Flex>
   </Box>
 );

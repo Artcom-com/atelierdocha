@@ -12,14 +12,14 @@ const NavItem = (props: JSX.IntrinsicAttributes & OmitCommonProps<React.Detailed
       rounded="md"
       py="3"
       cursor="pointer"
-      color="blackAlpha.900"
+      color="#5B7300"
       _hover={{
         bg: 'blackAlpha.300',
         color: 'whiteAlpha.900',
       }}
       role="group"
-      fontWeight="semibold"
       transition=".15s ease"
+      justifyContent="center"
       {...rest}
     >
       {children}
