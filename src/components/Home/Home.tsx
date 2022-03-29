@@ -8,7 +8,7 @@ import HomeButton from './HomeButton/HomeButton';
 const Home = (): JSX.Element => (
   <Flex
     width="100%"
-    p="2.8em"
+    p={{ base: '1.8em', xl: '2.8em' }}
     bg="#ecf2b8"
     flexDir="column"
   >
