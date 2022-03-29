@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Flex, Text,
+  Flex, Text, chakra,
 } from '@chakra-ui/react';
 import FontBorder from '../UI/FontBorder/FontBorder';
 import HomeButton from './HomeButton/HomeButton';
@@ -13,7 +13,7 @@ const Home = (): JSX.Element => (
     flexDir="column"
   >
     <Flex flexDir="column">
-      <Text
+      <chakra.h2
         fontWeight="900"
         fontSize={{ base: '2.5em', md: '4em', xl: '8em' }}
         color="#fff"
@@ -29,12 +29,11 @@ const Home = (): JSX.Element => (
         MAIS
         {' '}
         <FontBorder content="LEVE" />
-      </Text>
+      </chakra.h2>
       <Text
         fontSize={{ base: '1em', md: '1.3em', xl: '1.8em' }}
         color="#fff"
         ml="5px"
-        fontWeight={{ md: '900' }}
       >
         LEVE ATELIER DO CHÁ PARA SUA VIDA
 
