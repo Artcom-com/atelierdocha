@@ -6,9 +6,7 @@ import Link from 'next/link';
 import Logo from '../../UI/Logo';
 import Line from './Line';
 
-// TODO: Usar Image do Chakra UI
-
-const Header = () => (
+const Header = (): JSX.Element => (
   <Flex bg="#ecf2b8" px="2.5em" pt="2em" flexDir="column">
     <Flex w="100%" justifyContent="flex-end">
       <HStack spacing={2}>
