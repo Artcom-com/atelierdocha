@@ -12,22 +12,26 @@ const Header = () => (
   <Flex bg="#ecf2b8" px="2.5em" pt="2em" flexDir="column">
     <Flex w="100%" justifyContent="flex-end">
       <HStack spacing={2}>
-        <Image
-          src="/images/svgs/whatsapp.svg"
-          w="40px"
-          h="40px"
-          alt="Whatsapp logo"
-        />
-        <Image
-          src="/images/svgs/instagram.svg"
-          w="40px"
-          h="40px"
-          alt="Instagram logo"
-        />
+        <a href="/">
+          <Image
+            src="/images/svgs/whatsapp.svg"
+            w="40px"
+            h="40px"
+            alt="Whatsapp logo"
+          />
+        </a>
+        <a href="/">
+          <Image
+            src="/images/svgs/instagram.svg"
+            w="40px"
+            h="40px"
+            alt="Instagram logo"
+          />
+        </a>
       </HStack>
     </Flex>
     <Flex>
-      <Box w="120px" h="120px">
+      <Box w="150px" h="150px" ml="0.5em">
         <Logo />
       </Box>
       <Flex w="full">
