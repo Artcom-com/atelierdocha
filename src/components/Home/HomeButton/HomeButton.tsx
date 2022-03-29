@@ -15,6 +15,10 @@ const HomeButton = ({ action }: HomeButtonProps) => (
       size="lg"
       fontSize={{ base: '1em', xl: '1.2em' }}
       px="1.5em"
+      transition="0.5s"
+      _hover={{
+        bg: '#404f08',
+      }}
     >
       {action}
     </Button>
