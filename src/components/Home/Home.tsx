@@ -15,7 +15,7 @@ const Home = (): JSX.Element => (
     <Flex flexDir="column">
       <Text
         fontWeight="900"
-        fontSize={{ base: '4em', xl: '8em' }}
+        fontSize={{ base: '2.5em', md: '4em', xl: '8em' }}
         color="#fff"
         lineHeight={1}
       >
@@ -31,7 +31,7 @@ const Home = (): JSX.Element => (
         <FontBorder content="LEVE" />
       </Text>
       <Text
-        fontSize={{ base: '1.3em', xl: '1.8em' }}
+        fontSize={{ base: '1em', md: '1.3em', xl: '1.8em' }}
         color="#fff"
         ml="5px"
       >
@@ -41,7 +41,8 @@ const Home = (): JSX.Element => (
     </Flex>
     <HomeButton action="Acessar" />
     <Flex
-      justifyContent="flex-end"
+      justifyContent={{ base: 'center', md: 'flex-end' }}
+      mt="15px"
     >
       <Flex
         width="300px"
@@ -53,7 +54,7 @@ const Home = (): JSX.Element => (
       >
         <Text
           color="#fff"
-          fontSize={{ base: '1.5em', xl: '1.8em' }}
+          fontSize={{ base: '1em', md: '1.5em', xl: '1.8em' }}
           textAlign="center"
         >
           ENTRAMOS EM
