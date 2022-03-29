@@ -31,7 +31,7 @@ const Home = (): JSX.Element => (
         <FontBorder content="LEVE" />
       </Text>
       <Text
-        fontSize={{ base: '1em', md: '1.3em', xl: '1.8em' }}
+        fontSize={{ base: '0.8em', md: '1.3em', xl: '1.8em' }}
         color="#fff"
         ml="5px"
       >
