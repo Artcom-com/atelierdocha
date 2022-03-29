@@ -15,7 +15,7 @@ const Home = (): JSX.Element => (
     <Flex flexDir="column">
       <Text
         fontWeight="900"
-        fontSize="8em"
+        fontSize={{ base: '4em', xl: '8em' }}
         color="#fff"
         lineHeight={1}
       >
@@ -31,7 +31,7 @@ const Home = (): JSX.Element => (
         <FontBorder content="LEVE" />
       </Text>
       <Text
-        fontSize="1.8em"
+        fontSize={{ base: '1.3em', xl: '1.8em' }}
         color="#fff"
         ml="5px"
       >
@@ -53,7 +53,7 @@ const Home = (): JSX.Element => (
       >
         <Text
           color="#fff"
-          fontSize="1.8em"
+          fontSize={{ base: '1.5em', xl: '1.8em' }}
           textAlign="center"
         >
           ENTRAMOS EM
