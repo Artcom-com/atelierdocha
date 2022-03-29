@@ -12,7 +12,7 @@ const HomeButton = ({ action }: HomeButtonProps) => (
       borderWidth="2px"
       color="#fff"
       borderRadius="20px"
-      size="md"
+      size="lg"
       fontSize="1.2em"
       px="1.5em"
     >
