@@ -1,0 +1,9 @@
+.br {
+  display: block;
+}
+
+@media (min-width: 30em ) and (max-width: 48em) {
+  .br {
+    display: none;
+  }
+}
