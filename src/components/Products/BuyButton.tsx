@@ -19,8 +19,9 @@ const BuyButton = ({ whatsMessage }: BuyButtonProps) => (
         color="#fff"
         borderRadius="20px"
         size="lg"
-        fontSize={{ base: '0.8em', xl: '1.2em' }}
+        fontSize={{ base: '0.7em', xl: '1.2em' }}
         pr="0 !important"
+        pl="0.8em"
         transition="0.5s"
         _hover={{
           bg: '#404f08',
