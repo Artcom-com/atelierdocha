@@ -2,7 +2,7 @@
   display: block;
 }
 
-@media (min-width: 30em ) and (max-width: 48em) {
+@media (min-width: 15em ) and (max-width: 48em) {
   .br {
     display: none;
   }
