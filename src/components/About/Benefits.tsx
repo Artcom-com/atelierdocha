@@ -44,7 +44,7 @@ const Benefits = (): JSX.Element => (
       }}
       p="2em"
       fontSize={{
-        base: '12px', sm: '14px', md: '16px', xl: '20px',
+        base: '14px', sm: '14px', md: '16px', xl: '20px',
       }}
       gap={2}
       bg={{ base: '#5b7300', sm: '#5b7300', md: '#fff' }}
