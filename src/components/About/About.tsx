@@ -7,7 +7,7 @@ const About = () => (
   <>
     <Flex
       my={{ base: '1.5em', xl: '2.5em' }}
-      p={{ base: '1.5em', xl: '4.5em' }}
+      p={{ base: '1.5em', md: '3em', xl: '8em' }}
       bg="#5B7300"
       color="#fff"
       flexDir="column"

@@ -9,7 +9,7 @@ const Home: NextPage = () => (
   <>
     <Flex
       flexDir="column"
-      px="2em"
+      px={{ base: '2em', xl: '4em' }}
     >
       <Header />
       <PageHome />
