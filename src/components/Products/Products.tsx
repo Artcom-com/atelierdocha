@@ -50,7 +50,7 @@ const Products = (): JSX.Element => {
       <Grid
         templateColumns={{ base: 'repeat(2, 1fr)', xl: 'repeat(4, 1fr)' }}
         gap={8}
-        px={{ base: '2.5em', xl: '6em' }}
+        px={{ base: '1.8em', xl: '6em' }}
       >
         {products.map((product, index) => (
           <ProductsCard
