@@ -4,6 +4,7 @@ import { Flex } from '@chakra-ui/react';
 import Header from '../components/Layout/Header/Header';
 import PageHome from '../components/Home/Home';
 import About from '../components/About/About';
+import Products from '../components/Products/Products';
 
 const Home: NextPage = () => (
   <>
@@ -15,6 +16,7 @@ const Home: NextPage = () => (
       <PageHome />
     </Flex>
     <About />
+    <Products />
   </>
 );
 
