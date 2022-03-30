@@ -8,7 +8,7 @@ import Line from './Line';
 import SideMenu from './SideMenu';
 
 const Header = (): JSX.Element => (
-  <chakra.header display="flex" bg="#ecf2b8" px="2.5em" pt="2em" flexDir="column">
+  <chakra.header display="flex" px="2.5em" pt="2em" flexDir="column">
     <Flex w="100%" justifyContent="flex-end">
       <HStack spacing={2}>
         <a href="/">

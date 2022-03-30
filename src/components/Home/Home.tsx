@@ -9,7 +9,6 @@ const Home = (): JSX.Element => (
   <Flex
     width="100%"
     p={{ base: '1.8em', xl: '2.8em' }}
-    bg="#ecf2b8"
     flexDir="column"
   >
     <Flex flexDir="column">
