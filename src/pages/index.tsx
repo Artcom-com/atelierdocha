@@ -5,6 +5,7 @@ import Header from '../components/Layout/Header/Header';
 import PageHome from '../components/Home/Home';
 import About from '../components/About/About';
 import Products from '../components/Products/Products';
+import Footer from '../components/Layout/Footer/Footer';
 
 const Home: NextPage = () => (
   <>
@@ -17,6 +18,7 @@ const Home: NextPage = () => (
     </Flex>
     <About />
     <Products />
+    <Footer />
   </>
 );
 
