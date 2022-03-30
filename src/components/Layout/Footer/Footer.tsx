@@ -90,7 +90,87 @@ const Footer = (): JSX.Element => (
           </Text>
         </Flex>
       </Flex>
+
+      <Flex
+        flexDir="column"
+        gap={4}
+      >
+        <Flex
+          alignItems="center"
+          gap={6}
+        >
+          <Image
+            src="/images/svgs/email.svg"
+            w={{ base: '40px', xl: '50px' }}
+            h={{ base: '40px', xl: '50px' }}
+            alt="Email logo"
+          />
+
+          <Text
+            fontSize={{ base: '1.5em', xl: '2em' }}
+            color="#fff"
+            fontWeight="700"
+          >
+
+            sac@atelierdocha.com
+
+          </Text>
+        </Flex>
+
+        <Flex
+          alignItems="center"
+          gap={6}
+        >
+          <Image
+            src="/images/svgs/whatsapp-2.svg"
+            w={{ base: '40px', xl: '50px' }}
+            h={{ base: '40px', xl: '50px' }}
+            alt="Whatsapp logo"
+          />
+
+          <Text
+            fontSize={{ base: '1.5em', xl: '2em' }}
+            color="#fff"
+            fontWeight="700"
+          >
+
+            @atelierdocha
+
+          </Text>
+        </Flex>
+
+        <Flex
+          alignItems="center"
+          gap={6}
+        >
+          <Image
+            src="/images/svgs/facebook.svg"
+            w={{ base: '40px', xl: '50px' }}
+            h={{ base: '40px', xl: '50px' }}
+            alt="Facebook logo"
+          />
+
+          <Text
+            fontSize={{ base: '1.5em', xl: '2em' }}
+            color="#fff"
+            fontWeight="700"
+          >
+
+            atelierdocha
+
+          </Text>
+        </Flex>
+      </Flex>
     </Grid>
+    <Flex
+      bg="#6b5f00"
+      py="1.2em"
+      alignItems="center"
+    >
+      <Text color="#fff" textAlign="center" w="100%">
+        2022 - Atelier do Chá. Todos os direitos reservados. Desenvolvido por Artcom Comnunicações
+      </Text>
+    </Flex>
   </Flex>
 );
 
