@@ -8,9 +8,9 @@ import Line from './Line';
 import SideMenu from './SideMenu';
 
 const Header = (): JSX.Element => (
-  <chakra.header display="flex" px="2.5em" pt="2em" flexDir="column">
+  <chakra.header display="flex" px={{ base: '1em', xl: '2.5em' }} pt={{ base: '0.5em', xl: '1.5em' }} flexDir="column">
     <Flex w="100%" justifyContent="flex-end">
-      <HStack spacing={2}>
+      <HStack spacing={2} position={{ base: 'initial', xl: 'absolute' }}>
         <a href="/">
           <Image
             src="/images/svgs/whatsapp.svg"
@@ -30,12 +30,12 @@ const Header = (): JSX.Element => (
       </HStack>
     </Flex>
     <Flex>
-      <Flex w={{ base: '100px', xl: '150px' }} h={{ base: '100px', xl: '150px' }} ml="0.5em">
+      <Flex w={{ base: '100px', xl: '130px' }} h={{ base: '100px', xl: '150px' }} ml="0.5em">
         <Logo />
       </Flex>
       <HStack
         ml="2em"
-        fontSize="1.5em"
+        fontSize="1.2em"
         alignItems="center"
         spacing={6}
         display={{ base: 'none', xl: 'inline-flex' }}

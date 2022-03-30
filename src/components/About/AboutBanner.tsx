@@ -9,10 +9,10 @@ const AboutBanner = () => (
     bgRepeat="no-repeat"
     bgSize="100% 100%"
     w="100%"
-    h={{ base: '200px', md: '400px', xl: '600px' }}
+    h={{ base: '200px', md: '600px', xl: '800px' }}
     alignItems="center"
     px="1.5em"
-    mt={{ base: '1.5em', xl: '2.5em' }}
+    mt={{ base: '1.5em', xl: '5em' }}
   >
     <Flex
       h="50%"

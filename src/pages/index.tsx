@@ -8,12 +8,8 @@ import About from '../components/About/About';
 const Home: NextPage = () => (
   <>
     <Flex
-      w="full"
-      h="full"
       flexDir="column"
-      bgImage="/images/home.png"
-      bgRepeat="no-repeat"
-      bgSize="100% 100%"
+      px="2em"
     >
       <Header />
       <PageHome />

@@ -9,7 +9,8 @@ import classes from './Benefits.module.css';
 const Benefits = (): JSX.Element => (
   <Flex
     flexDir="column"
-    my={{ base: '1.5em', xl: '2.5em' }}
+    my={{ base: '1.5em', xl: '5em' }}
+    bg="#fff"
   >
     <chakra.h3
       w="100%"
