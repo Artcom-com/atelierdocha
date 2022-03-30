@@ -1,11 +1,15 @@
-import { chakra, Flex } from '@chakra-ui/react';
 import React from 'react';
+import {
+  Box, chakra, Flex, Grid, Image, Text,
+} from '@chakra-ui/react';
+// import classes from './Footer.module.css';
 
 const Footer = (): JSX.Element => (
   <Flex
     w="full"
     bg="#fff"
-    py="4em"
+    pt="4em"
+    flexDir="column"
   >
     <chakra.h3
       fontWeight="bold"
@@ -22,6 +26,71 @@ const Footer = (): JSX.Element => (
       {' '}
       por Chá
     </chakra.h3>
+
+    <Grid
+      templateColumns="300px repeat(2, 1fr)"
+      bg="#5b7300"
+      w="full"
+      h="full"
+      py="4em"
+      px="3em"
+    >
+      <Flex
+        h="full"
+      >
+        <Image
+          src="/logo/footer-logo.svg"
+          w={{ base: '30px', xl: '200px' }}
+          h={{ base: '30px', xl: '200px' }}
+          alt="Whatsapp logo"
+        />
+        {/* <Box height="8px" position="absolute" boxShadow="0 4px 4px -2px #000000" p="1px" /> */}
+        <Box
+          width="3px"
+          height="75%"
+          my="auto"
+          p="auto"
+          bg="#fff"
+        />
+      </Flex>
+      <Flex
+        flexDir="column"
+        gap={8}
+      >
+        <Text
+          fontSize={{ base: '1em', xl: '1.5em' }}
+          color="#fff"
+        >
+          Rua Joaquim Leopodilno Lopes, nº 370
+          <br />
+          Bairro Consolação - Vitória - ES
+          <br />
+          Cep: 29045-580
+        </Text>
+
+        <Flex
+          alignItems="center"
+          gap={6}
+        >
+          <Image
+            src="/images/svgs/whatsapp-2.svg"
+            w={{ base: '40px', xl: '60px' }}
+            h={{ base: '40px', xl: '60px' }}
+            alt="Whatsapp logo"
+          />
+
+          <Text
+            fontSize={{ base: '1.5em', xl: '2.5em' }}
+            color="#fff"
+            fontWeight="700"
+          >
+
+            (27) 98868-9325
+
+          </Text>
+        </Flex>
+      </Flex>
+    </Grid>
   </Flex>
 );
 
