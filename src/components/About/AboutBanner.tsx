@@ -12,7 +12,7 @@ const AboutBanner = () => (
     h={{ base: '200px', md: '400px', xl: '600px' }}
     alignItems="center"
     px="1.5em"
-    my={{ base: '1.5em', xl: '2.5em' }}
+    mt={{ base: '1.5em', xl: '2.5em' }}
   >
     <Flex
       h="50%"

@@ -1,6 +1,7 @@
 import React from 'react';
 import { chakra, Flex, Text } from '@chakra-ui/react';
 import AboutBanner from './AboutBanner';
+import Benefits from './Benefits';
 
 const About = () => (
   <>
@@ -30,6 +31,7 @@ const About = () => (
       </Text>
     </Flex>
     <AboutBanner />
+    <Benefits />
   </>
 );
 
