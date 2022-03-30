@@ -9,6 +9,7 @@ import classes from './Benefits.module.css';
 const Benefits = (): JSX.Element => (
   <Flex
     flexDir="column"
+    py="4em"
     my={{ base: '1.5em', xl: '5em' }}
     bg="#fff"
   >
