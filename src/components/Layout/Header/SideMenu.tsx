@@ -37,7 +37,7 @@ const SideMenu = (): JSX.Element => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <SideContent w="full" borderRight="none" />
+          <SideContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
     </Flex>
