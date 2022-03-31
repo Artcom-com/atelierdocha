@@ -10,6 +10,7 @@ const Footer = (): JSX.Element => (
     bg="#fff"
     pt="4em"
     flexDir="column"
+    alignItems="center"
   >
     <chakra.h3
       fontWeight="bold"
@@ -28,7 +29,7 @@ const Footer = (): JSX.Element => (
     </chakra.h3>
 
     <Grid
-      templateColumns="300px repeat(2, 1fr)"
+      templateColumns={{ base: '', md: '300px repeat(2, 1fr)' }}
       bg="#5b7300"
       w="full"
       h="full"
@@ -37,11 +38,12 @@ const Footer = (): JSX.Element => (
     >
       <Flex
         h="full"
+        justifyContent="center"
       >
         <Image
           src="/logo/footer-logo.svg"
-          w={{ base: '30px', xl: '200px' }}
-          h={{ base: '30px', xl: '200px' }}
+          w="200px"
+          h="200px"
           alt="Whatsapp logo"
         />
         {/* <Box height="8px" position="absolute" boxShadow="0 4px 4px -2px #000000" p="1px" /> */}
@@ -51,15 +53,19 @@ const Footer = (): JSX.Element => (
           my="auto"
           p="auto"
           bg="#fff"
+          display={{ base: 'none', md: 'block' }}
         />
       </Flex>
       <Flex
         flexDir="column"
         gap={8}
+        justifyContent="center"
       >
         <Text
-          fontSize={{ base: '1em', xl: '1.5em' }}
+          fontSize={{ base: '1.2em', xl: '1.5em' }}
           color="#fff"
+          textAlign={{ base: 'center', md: 'left' }}
+          mt={{ base: '1.5em', md: '0' }}
         >
           Rua Joaquim Leopodilno Lopes, nº 370
           <br />
@@ -166,6 +172,7 @@ const Footer = (): JSX.Element => (
       bg="#6b5f00"
       py="1.2em"
       alignItems="center"
+      w="full"
     >
       <Text color="#fff" textAlign="center" w="100%">
         2022 - Atelier do Chá. Todos os direitos reservados. Desenvolvido por Artcom Comnunicações
