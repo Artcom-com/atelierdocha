@@ -6,11 +6,14 @@ import '../styles/globals.css';
 import '../styles/reset.css';
 // eslint-disable-next-line import/no-unresolved
 import { theme } from '../styles/theme';
+import ScrollProvider from '../context/ScrollProvider';
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      <ScrollProvider>
+        <Component {...pageProps} />
+      </ScrollProvider>
     </ChakraProvider>
   );
 }
