@@ -29,7 +29,7 @@ const Footer = (): JSX.Element => (
     </chakra.h3>
 
     <Grid
-      templateColumns={{ base: '', md: '300px repeat(2, 1fr)' }}
+      templateColumns={{ base: '', xl: '300px repeat(2, 1fr)' }}
       bg="#5b7300"
       w="full"
       h="full"
@@ -46,14 +46,13 @@ const Footer = (): JSX.Element => (
           h="200px"
           alt="Whatsapp logo"
         />
-        {/* <Box height="8px" position="absolute" boxShadow="0 4px 4px -2px #000000" p="1px" /> */}
         <Box
           width="3px"
           height="75%"
           my="auto"
           p="auto"
           bg="#fff"
-          display={{ base: 'none', md: 'block' }}
+          display={{ base: 'none', xl: 'block' }}
         />
       </Flex>
       <Flex
@@ -64,7 +63,7 @@ const Footer = (): JSX.Element => (
         <Text
           fontSize={{ base: '1.2em', xl: '1.5em' }}
           color="#fff"
-          textAlign={{ base: 'center', md: 'left' }}
+          textAlign={{ base: 'center', xl: 'left' }}
           mt={{ base: '1.5em', md: '0' }}
         >
           Rua Joaquim Leopodilno Lopes, nº 370
@@ -75,8 +74,9 @@ const Footer = (): JSX.Element => (
         </Text>
 
         <Flex
-          alignItems="center"
+          justifyContent={{ base: 'flex-start', md: 'center', xl: 'flex-start' }}
           gap={6}
+          mb={{ base: '1.8em', xl: '0' }}
         >
           <Image
             src="/images/svgs/whatsapp-2.svg"
@@ -104,6 +104,7 @@ const Footer = (): JSX.Element => (
         <Flex
           alignItems="center"
           gap={6}
+          justifyContent={{ base: 'flex-start', md: 'center', xl: 'flex-start' }}
         >
           <Image
             src="/images/svgs/email.svg"
@@ -126,9 +127,10 @@ const Footer = (): JSX.Element => (
         <Flex
           alignItems="center"
           gap={6}
+          justifyContent={{ base: 'flex-start', md: 'center', xl: 'flex-start' }}
         >
           <Image
-            src="/images/svgs/whatsapp-2.svg"
+            src="/images/svgs/instagram.svg"
             w={{ base: '40px', xl: '50px' }}
             h={{ base: '40px', xl: '50px' }}
             alt="Whatsapp logo"
@@ -148,6 +150,7 @@ const Footer = (): JSX.Element => (
         <Flex
           alignItems="center"
           gap={6}
+          justifyContent={{ base: 'flex-start', md: 'center', xl: 'flex-start' }}
         >
           <Image
             src="/images/svgs/facebook.svg"
