@@ -65,6 +65,7 @@ const Products = (): JSX.Element => {
       my={{ base: '1.5em', xl: '2.5em' }}
       alignItems="center"
       py="4em"
+      ref={ref}
     >
       <chakra.h3
         fontWeight="bold"

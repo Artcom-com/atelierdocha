@@ -42,6 +42,7 @@ const Footer = (): JSX.Element => {
       pt="4em"
       flexDir="column"
       alignItems="center"
+      ref={ref}
     >
       <chakra.h3
         fontWeight="bold"
