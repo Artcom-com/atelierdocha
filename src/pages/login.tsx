@@ -2,7 +2,6 @@ import React, {
   FormEvent, useState,
 } from 'react';
 // import { useRouter } from 'next/router';
-import Link from 'next/link';
 import {
   Button, ButtonGroup, chakra, Flex, Grid, useToast,
 } from '@chakra-ui/react';
@@ -91,7 +90,12 @@ const Login: NextPage = () => {
         <FormHeader />
         <Form handleSubmit={handleSubmit}>
           <chakra.h1 w="full" textAlign="center" fontSize="48px">Entrar</chakra.h1>
-          <Grid w="80%" templateRows="repeat(3, 1fr)" alignItems="center" gap={6}>
+          <Grid
+            w="80%"
+            templateRows="repeat(3, 1fr)"
+            alignItems="center"
+            gap={6}
+          >
             <BasicInput id="email" label="E-mail" placeholder="example@example.com" onChangehandle={setEmail} />
             <BasicInput id="password" label="Senha" placeholder="************" type="password" onChangehandle={setPassword} />
             <ButtonGroup
@@ -99,31 +103,19 @@ const Login: NextPage = () => {
               py="1em"
             >
               <Button
-                bg="#fff"
+                color="#fff"
                 fontSize="24px"
-                border="2px #00735C solid"
+                border="none"
+                bg="#6b5f00"
                 w="100%"
                 h="60px"
+                _hover={{
+                  bg: '#5b7300',
+                }}
                 type="submit"
               >
                 Entrar
               </Button>
-              <Link href="/register" passHref>
-                <Button
-                  bg="#00735C"
-                  fontSize="24px"
-                  color="#fff"
-                  w="100%"
-                  h="60px"
-                  mx="0px !important"
-                  mt="15px"
-                  _hover={{
-                    bg: '#00E091',
-                  }}
-                >
-                  Cadastre-se
-                </Button>
-              </Link>
             </ButtonGroup>
           </Grid>
         </Form>

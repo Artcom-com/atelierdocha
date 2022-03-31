@@ -12,7 +12,7 @@ const FormHeader = (): JSX.Element => (
     py="3em"
   >
     <Link href="/" passHref>
-      <Button variant="link" color="#00735C" fontSize="26px">
+      <Button variant="link" color="#6b5f00" fontSize="26px">
         {' '}
         <FaLongArrowAltLeft />
         Voltar

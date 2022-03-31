@@ -3,7 +3,6 @@
 import React from 'react';
 
 import {
-  useColorModeValue,
   Input,
   FormControl,
   FormLabel,
@@ -27,19 +26,26 @@ const BasicInput = (
     id={id}
     isRequired
     w="100%"
-    padding="1rem"
   >
-    <FormLabel>{label}</FormLabel>
+    <FormLabel
+      fontSize="1.5em"
+    >
+      {label}
+    </FormLabel>
     <Input
       isRequired
-      marginBottom="0.5rem"
+      fontSize="1.2em"
+      h="70px"
       variant="outline"
       placeholder={placeholder}
-      borderColor={useColorModeValue('yellow.700', 'gray.600')}
+      borderColor="#5b7300"
+      _hover={{
+        borderColor: '#6b5f00',
+      }}
       bg="#fff"
       onChange={((e) => onChangehandle(e.target.value))}
       value={value}
-      type={type !== undefined ? 'text' : type}
+      type={type === undefined ? 'text' : type}
     />
   </FormControl>
 );
