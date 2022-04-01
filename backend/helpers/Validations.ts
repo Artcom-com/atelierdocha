@@ -3,7 +3,7 @@ import { ProductModel } from '../data/model/ProductModel';
 import { HttpErrors } from '../errors/HttpErrors';
 
 export default class Validations {
-  validationBody(body: ProductModel | undefined) {
+  validtionUnique(body: unknown | undefined) {
     if (body === undefined) {
       throw new HttpErrors.BadRequest('Não foi possível obter os dados enviados.');
     }

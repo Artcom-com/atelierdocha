@@ -6,7 +6,7 @@ export interface HttpResponse {
   statusCode: number
   error?: string
   message?: string
-  content?: string
+  content?: unknown
   payload?: string
 }
 
@@ -19,6 +19,11 @@ export interface HttpRequest extends NextApiRequest {
 export const ok = (message: string): HttpResponse => ({
   statusCode: 200,
   message,
+});
+
+export const okWithContent = (content: unknown): HttpResponse => ({
+  statusCode: 200,
+  content,
 });
 
 export const created = (message: string): HttpResponse => ({

@@ -3,7 +3,7 @@ import { FormHandleAdapter } from '../adapters/FormHandleAdapter';
 import { ImageHandleAdapter } from '../adapters/ImageHandleAdapter';
 import handleErrors from '../errors/handleErrors';
 import {
-  created, HttpResponse, serverError,
+  created, HttpResponse, okWithContent, serverError,
 } from '../helpers/http';
 import Validations from '../helpers/Validations';
 import ProductRepository from '../repositories/ProductRepository';
@@ -21,6 +21,24 @@ export default class ProductController {
     this.repository.connect();
     this.formHandle = formHandle;
     this.imageHandle = imageHandle;
+  }
+
+  async findById(req: NextApiRequest): Promise<HttpResponse> {
+    try {
+      const { id } = req.query;
+
+      this.validations.validtionUnique(id);
+
+      const product = await this.repository.findById(id as string);
+
+      return okWithContent(product);
+    } catch (err) {
+      const error = handleErrors(err as Error);
+      if (error !== undefined) {
+        return error;
+      }
+      return serverError('Erro de servidor. Se persistir, contate um responsável.');
+    }
   }
 
   async add(req: NextApiRequest): Promise<HttpResponse> {
