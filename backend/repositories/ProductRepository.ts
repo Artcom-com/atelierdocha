@@ -69,6 +69,14 @@ export default class ProductRepository implements ProductCases {
     });
   }
 
+  async delete(id: string): Promise<number> {
+    this.checkIfDBIsConnected();
+
+    const result = await (this.db as Db).collection('products').deleteOne({ _id: new ObjectId(id) });
+
+    return result.deletedCount;
+  }
+
   async pagination(page: number): Promise<ProductModel[]> {
     this.checkIfDBIsConnected();
 
