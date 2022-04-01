@@ -15,7 +15,7 @@ export default async function handler(
     await connect();
     const repository = new ProductRepository();
     await repository.connect();
-    const response = await repository.findById('62472f6d230f7e512091ccb5');
+    const response = await repository.delete('62472f6d230f7e512091ccb5');
     // const response = await repository.findPinneds();
     console.log(response);
     return res.status(200).json({ name: 'John Doe' });
