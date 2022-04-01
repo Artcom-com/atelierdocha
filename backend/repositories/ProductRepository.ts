@@ -48,7 +48,7 @@ export default class ProductRepository implements ProductCases {
     return products;
   }
 
-  async add(infos: ProductModel): Promise<void> {
+  async add(infos: Omit<ProductModel, 'pinned'>): Promise<void> {
     this.checkIfDBIsConnected();
     await (this.db as Db).collection('products').insertOne({
       ...infos,

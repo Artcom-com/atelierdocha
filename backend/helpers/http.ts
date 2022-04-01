@@ -1,3 +1,5 @@
+import { NextApiRequest } from 'next';
+import { ProductModel } from '../data/model/ProductModel';
 import { HttpErrors } from '../errors/HttpErrors';
 
 export interface HttpResponse {
@@ -6,6 +8,12 @@ export interface HttpResponse {
   message?: string
   content?: string
   payload?: string
+}
+
+export interface HttpRequest extends NextApiRequest {
+  body: {
+    products?: ProductModel
+  }
 }
 
 export const ok = (message: string): HttpResponse => ({

@@ -1,6 +1,10 @@
-import { ProductModel } from '../data/model/ProductModel';
+import { NextApiRequest } from 'next';
+import { FormHandleAdapter } from '../adapters/FormHandleAdapter';
+import { ImageHandleAdapter } from '../adapters/ImageHandleAdapter';
 import handleErrors from '../errors/handleErrors';
-import { created, HttpResponse, serverError } from '../helpers/http';
+import {
+  created, HttpResponse, serverError,
+} from '../helpers/http';
 import Validations from '../helpers/Validations';
 import ProductRepository from '../repositories/ProductRepository';
 
@@ -9,17 +13,26 @@ export default class ProductController {
 
   private readonly validations: Validations = new Validations();
 
-  constructor() {
+  private readonly formHandle: FormHandleAdapter;
+
+  private readonly imageHandle: ImageHandleAdapter;
+
+  constructor(formHandle: FormHandleAdapter, imageHandle: ImageHandleAdapter) {
     this.repository.connect();
+    this.formHandle = formHandle;
+    this.imageHandle = imageHandle;
   }
 
-  async add(infos: ProductModel): Promise<HttpResponse> {
+  async add(req: NextApiRequest): Promise<HttpResponse> {
     try {
-      const { imagePresentationUrl, name, price } = infos;
-      // service.upload()
+      const { fields, filepath } = await this.formHandle.handleForm(req);
+
+      const imagePresentationUrl = await this.imageHandle.saveImage(filepath);
+      const { name, price } = fields;
+
       this.validations.validateProduct({ imagePresentationUrl, name, price });
 
-      await this.repository.add(infos);
+      await this.repository.add({ imagePresentationUrl, name, price });
       return created('Produto criado com sucesso!');
     } catch (err) {
       const error = handleErrors(err as Error);
