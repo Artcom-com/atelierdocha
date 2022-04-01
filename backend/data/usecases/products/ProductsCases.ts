@@ -4,4 +4,6 @@ export interface ProductCases {
   add(infos: ProductModel): Promise<void>
   findById(id: string): Promise<ProductModel>
   findPinneds(): Promise<ProductModel[]>
+  update(id: string, infos: Partial<ProductModel>): Promise<void>
+  pagination(page: number): Promise<ProductModel[]>
 }

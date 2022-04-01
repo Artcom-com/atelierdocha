@@ -1,14 +1,11 @@
-import { Db, MongoClient, ObjectId } from 'mongodb';
+import { Db, ObjectId } from 'mongodb';
 import { ProductModel } from '../data/model/ProductModel';
 import { ProductCases } from '../data/usecases/products/ProductsCases';
 import cacheConnection from '../data/mongodb/connection';
 import connect from '../data/mongodb/mongodb';
-import DbNotInitialized from '../errors/DbNotInitialized';
-import { NotFound } from '../errors/HttpErrors';
+import { ServerErrors } from '../errors/ServerErrors';
 
 export default class ProductRepository implements ProductCases {
-  private client: MongoClient | undefined;
-
   private db: Db | undefined;
 
   async connect(): Promise<void> {
@@ -17,57 +14,67 @@ export default class ProductRepository implements ProductCases {
     }
 
     if (cacheConnection.cachedClient !== null && cacheConnection.cachedDb !== null) {
-      this.client = cacheConnection.cachedClient;
       this.db = cacheConnection.cachedDb;
     }
   }
 
-  async findById(id: string): Promise<ProductModel> {
+  checkIfDBIsConnected(): void {
     if (this.db === undefined) {
-      throw new DbNotInitialized();
+      throw new ServerErrors.DbNotInitialized();
     }
-
-    const products = await this.db.collection<ProductModel>('products').findOne({ _id: new ObjectId(id) });
-
-    if (products === null) {
-      throw new NotFound(`Produto de ID ${id} não existe.`);
-    }
-
-    const {
-      imagePresentationUrl, name, pinned, price,
-    } = products;
-
-    return {
-      imagePresentationUrl, name, pinned, price,
-    };
   }
 
-  async findPinneds(): Promise<ProductModel[]> {
-    if (this.db === undefined) {
-      throw new DbNotInitialized();
-    }
+  async findById(id: string): Promise<ProductModel> {
+    this.checkIfDBIsConnected();
 
-    const products = await this.db.collection<ProductModel>('products').find({ pinned: true }, {
+    const products = await (this.db as Db).collection<ProductModel>('products').find({ _id: new ObjectId(id) }, {
       projection: {
         imagePresentationUrl: 1, name: 1, price: 1, pinned: 1,
       },
     }).toArray();
 
-    if (products === null || products.length <= 0) {
-      throw new NotFound('Não há produtos cadastrados.');
-    }
+    return products[0];
+  }
+
+  async findPinneds(): Promise<ProductModel[]> {
+    this.checkIfDBIsConnected();
+
+    const products = await (this.db as Db).collection<ProductModel>('products').find({ pinned: true }, {
+      projection: {
+        imagePresentationUrl: 1, name: 1, price: 1, pinned: 1,
+      },
+    }).toArray();
 
     return products;
   }
 
   async add(infos: ProductModel): Promise<void> {
-    if (this.db === undefined) {
-      throw new DbNotInitialized();
-    }
-    await this.db.collection('products').insertOne({
+    this.checkIfDBIsConnected();
+    await (this.db as Db).collection('products').insertOne({
       ...infos,
+      pinned: false,
       created_at: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
       updated_at: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
     });
+  }
+
+  async update(id: string, infos: Partial<ProductModel>): Promise<void> {
+    this.checkIfDBIsConnected();
+
+    await (this.db as Db).collection('products').updateOne({ _id: new ObjectId(id) }, {
+      $set: {
+        ...infos,
+        updated_at: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+      },
+    });
+  }
+
+  async pagination(page: number): Promise<ProductModel[]> {
+    this.checkIfDBIsConnected();
+
+    const products = await (this.db as Db).collection<ProductModel>('products').find({}).skip(4 * page).limit(4)
+      .toArray();
+
+    return products;
   }
 }
