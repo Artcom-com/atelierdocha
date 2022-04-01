@@ -5,7 +5,7 @@ const connect = async (): Promise<void> => {
   if (process.env.NODE_ENV === 'development') {
     if (!cacheConnection.cachedClient && !cacheConnection.cachedDb) {
       const clientConnect = await MongoClient.connect(String(process.env.DATABASE_URL_MONGO));
-      const dbConnect = clientConnect.db('artcom');
+      const dbConnect = clientConnect.db('teste');
       cacheConnection.cachedClient = clientConnect;
       cacheConnection.cachedDb = dbConnect;
     }
