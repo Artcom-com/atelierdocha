@@ -38,5 +38,6 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'import/extensions': 'off',
     'class-methods-use-this': 'off',
+    '@typescript-eslint/no-namespace': 'off',
   },
 };
