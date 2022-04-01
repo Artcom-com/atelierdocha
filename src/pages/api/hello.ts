@@ -15,12 +15,14 @@ export default async function handler(
     await connect();
     const repository = new ProductRepository();
     await repository.connect();
-    await repository.add({
-      name: 'name',
-      imagePresentationUrl: 'www.image.com/image.png',
-      pinned: true,
-      price: '99,9',
-    });
+    // await repository.add({
+    //   name: 'name',
+    //   imagePresentationUrl: 'www.image.com/image.png',
+    //   pinned: true,
+    //   price: '99,9',
+    // });
+    const response = await repository.findById('62472f6d230f7e512091ccb5');
+    console.log(response);
     return res.status(200).json({ name: 'John Doe' });
   } catch (err) {
     // eslint-disable-next-line no-console
