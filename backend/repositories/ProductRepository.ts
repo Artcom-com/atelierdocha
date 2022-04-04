@@ -3,7 +3,6 @@ import { ProductModel } from '../data/model/ProductModel';
 import { ProductCases } from '../data/usecases/products/ProductsCases';
 import cacheConnection from '../data/mongodb/connection';
 import connect from '../data/mongodb/mongodb';
-import { ServerErrors } from '../errors/ServerErrors';
 
 export default class ProductRepository implements ProductCases {
   private db: Db | undefined;
@@ -18,14 +17,14 @@ export default class ProductRepository implements ProductCases {
     }
   }
 
-  checkIfDBIsConnected(): void {
+  async checkIfDBIsConnected(): Promise<void> {
     if (this.db === undefined) {
-      throw new ServerErrors.DbNotInitialized();
+      await this.connect();
     }
   }
 
   async findById(id: string): Promise<ProductModel> {
-    this.checkIfDBIsConnected();
+    await this.checkIfDBIsConnected();
 
     const products = await (this.db as Db).collection<ProductModel>('products').find({ _id: new ObjectId(id) }, {
       projection: {
@@ -37,7 +36,7 @@ export default class ProductRepository implements ProductCases {
   }
 
   async findPinneds(): Promise<ProductModel[]> {
-    this.checkIfDBIsConnected();
+    await this.checkIfDBIsConnected();
 
     const products = await (this.db as Db).collection<ProductModel>('products').find({ pinned: true }, {
       projection: {
@@ -49,7 +48,7 @@ export default class ProductRepository implements ProductCases {
   }
 
   async add(infos: Omit<ProductModel, 'pinned'>): Promise<void> {
-    this.checkIfDBIsConnected();
+    await this.checkIfDBIsConnected();
     await (this.db as Db).collection('products').insertOne({
       ...infos,
       pinned: false,
@@ -70,7 +69,7 @@ export default class ProductRepository implements ProductCases {
   }
 
   async delete(id: string): Promise<number> {
-    this.checkIfDBIsConnected();
+    await this.checkIfDBIsConnected();
 
     const result = await (this.db as Db).collection('products').deleteOne({ _id: new ObjectId(id) });
 
@@ -78,7 +77,7 @@ export default class ProductRepository implements ProductCases {
   }
 
   async pagination(page: number): Promise<ProductModel[]> {
-    this.checkIfDBIsConnected();
+    await this.checkIfDBIsConnected();
 
     const products = await (this.db as Db).collection<ProductModel>('products').find({}).skip(4 * page).limit(4)
       .toArray();
