@@ -1,0 +1,16 @@
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import type { NextApiRequest, NextApiResponse } from 'next';
+import connect from '../../../../../backend/data/mongodb/mongodb';
+import makeProductController from '../../../../../backend/factory/makeProductController';
+import { HttpResponse } from '../../../../../backend/helpers/http';
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<Omit<HttpResponse, 'statusCode'>>,
+) {
+  const controller = makeProductController();
+  await connect();
+  console.log(req.body);
+  const response = await controller.pinProduct(req);
+  return res.status(response.statusCode).json({ content: response.content });
+}

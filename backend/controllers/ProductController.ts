@@ -122,9 +122,14 @@ export default class ProductController {
       const { id } = req.query;
       const { pinned } = req.body;
       this.validations.validtionUnique(id);
-      const product = await this.repository.update(String(id), { pinned: (pinned as boolean) });
-      return okWithContent(product);
+      this.validations.validtionUnique(pinned);
+      await this.repository.update(String(id), { pinned: (pinned as boolean) });
+      if (pinned === false) {
+        return ok('Produto foi fixado no da primeira página.');
+      }
+      return ok('Produto retirado da primeira página.');
     } catch (err) {
+      console.log(err);
       const error = handleErrors(err as Error);
       if (error !== undefined) {
         return error;

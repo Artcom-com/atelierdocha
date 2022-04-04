@@ -15,18 +15,17 @@ export default async function handler(
   res: NextApiResponse<Omit<HttpResponse, 'statusCode'>>,
 ) {
   const controller = makeProductController();
-  let response: HttpResponse = {
-    statusCode: 0,
-    message: '',
-  };
   await connect();
   if (req.method === 'PUT') {
-    response = await controller.update(req);
+    const response = await controller.update(req);
+    return res.status(response.statusCode).json({ message: String(response.message) });
   }
 
   if (req.method === 'DELETE') {
-    response = await controller.delete(req);
+    const response = await controller.delete(req);
+    return res.status(response.statusCode).json({ message: String(response.message) });
   }
 
-  return res.status(response.statusCode).json({ message: String(response.message) });
+  const response = await controller.findById(req);
+  return res.status(response.statusCode).json({ content: response.content });
 }
