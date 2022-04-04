@@ -52,6 +52,7 @@ export default class FormidableAdapater implements FormHandleAdapter {
       fields: {
         name: fields.name,
         price: fields.price,
+        deletedImg: fields.deletedImg || '',
       },
       filepath: files?.filepath || '',
     };

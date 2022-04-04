@@ -1,5 +1,9 @@
 import { ProductModel } from '../../model/ProductModel';
 
+export interface UpdateProduct extends ProductModel {
+  deletedImg?: string
+}
+
 export interface ProductCases {
   add(infos: Omit<ProductModel, 'pinned'>): Promise<void>
   findById(id: string): Promise<ProductModel>

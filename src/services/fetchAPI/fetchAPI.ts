@@ -46,6 +46,21 @@ export default class FetchAPI<T> {
     };
   }
 
+  async put(complementUrl: string, info: any): Promise<FetchReturns<T>> {
+    const result = await fetch(`${this.apiURL}/${complementUrl}`, {
+      method: 'PUT',
+      headers: { ...this.headers },
+      body: this.headers['Content-Type'] === undefined ? info : JSON.stringify(info),
+    });
+
+    const data = await result.json() as T;
+
+    return {
+      statusCode: result.status,
+      data,
+    };
+  }
+
   setContentType(content: string): void {
     if (content === 'multipart/form-data') {
       delete this.headers['Content-Type'];

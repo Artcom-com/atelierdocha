@@ -4,6 +4,7 @@ import { validationField } from '../../src/utils/validations';
 import { FormHandleAdapter } from '../adapters/FormHandleAdapter';
 import { ImageHandleAdapter } from '../adapters/ImageHandleAdapter';
 import { ProductModel } from '../data/model/ProductModel';
+import { UpdateProduct } from '../data/usecases/products/ProductsCases';
 import handleErrors from '../errors/handleErrors';
 import {
   created, HttpResponse, ok, okWithContent, serverError,
@@ -84,10 +85,13 @@ export default class ProductController {
   }
 
   // eslint-disable-next-line max-len
-  async populateProductInfos(product: Partial<ProductModel>, filePath: string): Promise<Partial<ProductModel>> {
+  async populateProductInfos(product: Partial<UpdateProduct>, filePath: string): Promise<Partial<ProductModel>> {
     const infos: Partial<ProductModel> = {};
 
     if (!validationField(filePath)) {
+      if (product.deletedImg !== undefined && product.deletedImg !== '') {
+        await this.imageHandle.delete(product.deletedImg);
+      }
       infos.imagePresentationUrl = await this.imageHandle.saveImage(filePath);
     }
 
