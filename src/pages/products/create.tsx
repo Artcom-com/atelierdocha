@@ -74,7 +74,6 @@ const Login: NextPage = () => {
     data.append('productImg', image);
 
     api.setContentType('multipart/form-data');
-    console.log(api.getHeader());
     const result = await api.post('products', data);
     setIsLoading(false);
     if (result.data.error) {
