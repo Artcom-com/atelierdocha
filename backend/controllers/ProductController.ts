@@ -46,11 +46,13 @@ export default class ProductController {
   async add(req: NextApiRequest): Promise<HttpResponse> {
     try {
       const { fields, filepath } = await this.formHandle.handleForm(req);
+      console.log(fields, filepath);
 
       const imagePresentationUrl = await this.imageHandle.saveImage(filepath);
       const { name, price } = fields;
 
       this.validations.validateProduct({ imagePresentationUrl, name, price });
+      this.validations.validtionUnique(imagePresentationUrl);
 
       await this.repository.add({ imagePresentationUrl, name, price });
       return created('Produto criado com sucesso!');

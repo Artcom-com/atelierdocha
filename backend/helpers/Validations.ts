@@ -4,15 +4,15 @@ import { HttpErrors } from '../errors/HttpErrors';
 
 export default class Validations {
   validtionUnique(body: unknown | undefined) {
-    if (body === undefined) {
+    if (body === undefined || body === '') {
       throw new HttpErrors.BadRequest('Não foi possível obter os dados enviados.');
     }
   }
 
   validateProduct(infos: Omit<ProductModel, 'pinned'>) {
-    const { imagePresentationUrl, name, price } = infos;
+    const { name, price } = infos;
 
-    if (validationField(name) || validationField(price) || validationField(imagePresentationUrl)) {
+    if (validationField(name) || validationField(price)) {
       throw new HttpErrors.BadRequest('É preciso preencher todos os dados.');
     }
   }

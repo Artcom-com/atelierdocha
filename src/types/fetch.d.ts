@@ -5,7 +5,7 @@ export interface FetchReturns<T> {
 }
 
 export interface FetchAPIHeader {
-  'Content-Type': string
+  'Content-Type'?: string
   Accept: string
   Authorization?: string
 }

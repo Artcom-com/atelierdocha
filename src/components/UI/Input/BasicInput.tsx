@@ -14,12 +14,14 @@ export interface BasicFormControlProps {
   placeholder: string
   value?: string
   type?: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChangehandle: React.SetStateAction<any>
+  step?: string
 }
 
 const BasicInput = (
   {
-    id, label, placeholder, onChangehandle, value, type,
+    id, label, placeholder, onChangehandle, value, type, step,
   }: BasicFormControlProps,
 ) => (
   <FormControl
@@ -46,6 +48,7 @@ const BasicInput = (
       onChange={((e) => onChangehandle(e.target.value))}
       value={value}
       type={type === undefined ? 'text' : type}
+      step={step === undefined ? '' : step}
     />
   </FormControl>
 );

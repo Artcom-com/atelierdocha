@@ -35,7 +35,7 @@ export default class FetchAPI<T> {
     const result = await fetch(`${this.apiURL}/${complementUrl}`, {
       method: 'POST',
       headers: { ...this.headers },
-      body: JSON.stringify(info),
+      body: this.headers['Content-Type'] === undefined ? info : JSON.stringify(info),
     });
 
     const data = await result.json() as T;
@@ -44,6 +44,14 @@ export default class FetchAPI<T> {
       statusCode: result.status,
       data,
     };
+  }
+
+  setContentType(content: string): void {
+    if (content === 'multipart/form-data') {
+      delete this.headers['Content-Type'];
+    } else {
+      this.headers['Content-Type'] = content;
+    }
   }
 
   setAuthHeader(content: string): void {
