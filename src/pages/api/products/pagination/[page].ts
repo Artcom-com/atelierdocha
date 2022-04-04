@@ -10,6 +10,6 @@ export default async function handler(
 ) {
   const controller = makeProductController();
   await connect();
-  const response = await controller.pinProduct(req);
+  const response = await controller.pagination(req);
   return res.status(response.statusCode).json({ content: response.content });
 }

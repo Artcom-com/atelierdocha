@@ -137,4 +137,21 @@ export default class ProductController {
       return serverError('Erro de servidor. Se persistir, contate um responsável.');
     }
   }
+
+  async pagination(req: NextApiRequest): Promise<HttpResponse> {
+    try {
+      const { page } = req.query;
+      this.validations.validtionUnique(page);
+      const products = await this.repository.pagination(Number(page));
+
+      return okWithContent(products);
+    } catch (err) {
+      console.log(err);
+      const error = handleErrors(err as Error);
+      if (error !== undefined) {
+        return error;
+      }
+      return serverError('Erro de servidor. Se persistir, contate um responsável.');
+    }
+  }
 }
