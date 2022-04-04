@@ -31,9 +31,9 @@ export const created = (message: string): HttpResponse => ({
   message,
 });
 
-export const serverError = (message: string): HttpResponse => ({
+export const serverError = (error: string): HttpResponse => ({
   statusCode: 500,
-  message,
+  error,
 });
 
 export const notFound = (error: HttpErrors.NotFound): HttpResponse => ({

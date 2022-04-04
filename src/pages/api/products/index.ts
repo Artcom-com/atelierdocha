@@ -15,7 +15,8 @@ export default async function handler(
 ) {
   const controller = makeProductController();
   const response = await controller.add(req);
+  if (response.error) {
+    return res.status(response.statusCode).json({ error: response.error });
+  }
   return res.status(response.statusCode).json({ message: response.message });
-  // if (req.method === 'POST') {
-  // }
 }

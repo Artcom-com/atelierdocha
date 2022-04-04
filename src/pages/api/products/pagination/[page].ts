@@ -11,5 +11,8 @@ export default async function handler(
   const controller = makeProductController();
   await connect();
   const response = await controller.pagination(req);
+  if (response.error) {
+    return res.status(response.statusCode).json({ error: response.error });
+  }
   return res.status(response.statusCode).json({ content: response.content });
 }

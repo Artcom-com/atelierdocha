@@ -18,14 +18,23 @@ export default async function handler(
   await connect();
   if (req.method === 'PUT') {
     const response = await controller.update(req);
+    if (response.error) {
+      return res.status(response.statusCode).json({ error: response.error });
+    }
     return res.status(response.statusCode).json({ message: String(response.message) });
   }
 
   if (req.method === 'DELETE') {
     const response = await controller.delete(req);
+    if (response.error) {
+      return res.status(response.statusCode).json({ error: response.error });
+    }
     return res.status(response.statusCode).json({ message: String(response.message) });
   }
 
   const response = await controller.findById(req);
+  if (response.error) {
+    return res.status(response.statusCode).json({ error: response.error });
+  }
   return res.status(response.statusCode).json({ content: response.content });
 }
