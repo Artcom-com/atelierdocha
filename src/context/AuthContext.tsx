@@ -30,7 +30,7 @@ export default function AuthProvider({ children }: AuthProviderProps): JSX.Eleme
       const { authToken } = parseCookies();
 
       if (authToken) {
-        const response = await api.post('/user/recover', {
+        const response = await api.post('/user/recovery', {
           token: authToken,
         });
 
@@ -67,9 +67,13 @@ export default function AuthProvider({ children }: AuthProviderProps): JSX.Eleme
     });
 
     api.setAuthHeader(`Bearer ${response.data.payload}`);
+    const userReturns = response.data.content as Omit<UserModel, 'password'>;
     if (response.data.content !== undefined) {
       setUser({
-        userInfo: response.data.content as Omit<UserModel, 'password'>,
+        userInfo: {
+          id: userReturns.id,
+          email: userReturns.email,
+        },
       });
       return true;
     }

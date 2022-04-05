@@ -64,13 +64,15 @@ export default class TokenController {
     }
   }
 
-  async handleRecoverUserInfos(token: string): Promise<HttpResponse> {
+  async handleRecoverUserInfos(req: NextApiRequest): Promise<HttpResponse> {
     try {
+      const { token }: { [key: string]: string } = req.body;
+
       this.validations.validtionInfo(token);
 
       const result = this.webToken.verify(token);
 
-      const user = await this.getUserByEmail(String(result.id));
+      const user = await this.getUserByEmail(String(result.email));
 
       const newToken = this.webToken.sign({
         id: user.id,
@@ -82,6 +84,7 @@ export default class TokenController {
         email: user.email as string,
       });
     } catch (err: unknown | Error | TokenExpiredError) {
+      console.log(err);
       if (err instanceof TokenExpiredError) {
         return badRequest(new HttpErrors.BadRequest('Token expirado'));
       }
