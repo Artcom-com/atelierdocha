@@ -33,6 +33,7 @@ export default class ProductController {
       this.validations.validtionUnique(id);
 
       const product = await this.repository.findById(id as string);
+      this.validations.checkIfExists(product, 'Produto');
 
       return okWithContent(product);
     } catch (err) {
