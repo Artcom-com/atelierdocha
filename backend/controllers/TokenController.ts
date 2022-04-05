@@ -24,8 +24,8 @@ export default class TokenController {
     this.webToken = webToken;
   }
 
-  async getUserById(id: string): Promise<UserModel> {
-    const user = await this.repository.findById(String(id));
+  async getUserByEmail(email: string): Promise<UserModel> {
+    const user = await this.repository.findByEmail(email);
 
     if (user === undefined) {
       throw new HttpErrors.NotFound('Usuário não existe.');
@@ -36,19 +36,22 @@ export default class TokenController {
 
   async handleLogin(req: NextApiRequest): Promise<HttpResponse> {
     try {
-      const { id, email, password } = req.body as UserModel;
+      const { email, password } = req.body as UserModel;
 
-      this.validations.validtionInfo(id);
       this.validations.validateUser({ email, password });
-      await this.getUserById(String(id));
+      const user = await this.getUserByEmail(email);
 
+      if (user.password !== password) {
+        return badRequest(new HttpErrors.BadRequest('Senha ou emails incorretos.'));
+      }
       const payload = this.webToken.sign({
-        id,
+        // eslint-disable-next-line dot-notation
+        id: user.id,
         email,
       }, '2d');
 
       const userInfo = {
-        id,
+        id: user.id,
         email,
       };
 
@@ -69,7 +72,7 @@ export default class TokenController {
 
       const result = this.webToken.verify(token);
 
-      const user = await this.getUserById(String(result.id));
+      const user = await this.getUserByEmail(String(result.id));
 
       const newToken = this.webToken.sign({
         id: user.id,

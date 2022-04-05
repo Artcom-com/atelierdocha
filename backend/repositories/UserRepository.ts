@@ -41,6 +41,20 @@ export default class UserRepository implements UsersCases {
     return user[0];
   }
 
+  async findByEmail(email: string): Promise<UserModel> {
+    await this.checkIfDBIsConnected();
+    const user = await (this.db as Db).collection('users').find({
+      email,
+    }).toArray();
+
+    const { _id, ...rest } = user[0];
+
+    return {
+      id: _id.toString(),
+      ...rest as Omit<UserModel, 'id'>,
+    };
+  }
+
   async update(id: string, infos: UserModel): Promise<void> {
     await this.checkIfDBIsConnected();
 

@@ -90,7 +90,7 @@ export default function AuthProvider({ children }: AuthProviderProps): JSX.Eleme
     isAuthenticated,
     signIn,
     signOut,
-  }), [user, isAuthenticated, signIn, signOut]);
+  }), [user, isAuthenticated, signOut]);
 
   return (
     <AuthContext.Provider value={context}>

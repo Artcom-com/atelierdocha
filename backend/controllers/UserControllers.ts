@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { NextApiRequest } from 'next';
 import { validateEmail } from '../../src/utils/validations';
 import { UserModel } from '../data/model/UserModel';
@@ -18,7 +19,7 @@ export default class UserController {
     try {
       const { email, password } = req.body as UserModel;
       this.validations.validateUser({ email, password });
-      this.repository.add({ email, password });
+      await this.repository.add({ email, password });
       return ok('Usuário criado com sucesso!');
     } catch (err) {
       console.log(err);
@@ -38,6 +39,7 @@ export default class UserController {
       this.validations.checkIfExists(user, 'Usuário');
       return okWithContent(user);
     } catch (err) {
+      console.log(err);
       const error = handleErrors(err as Error);
       if (error !== undefined) {
         return error;
@@ -73,6 +75,7 @@ export default class UserController {
 
       return ok('Usuário atualizado com sucesso!');
     } catch (err) {
+      console.log(err);
       const error = handleErrors(err as Error);
       if (error !== undefined) {
         return error;
@@ -91,6 +94,7 @@ export default class UserController {
 
       return ok('Usuário deletado com sucesso!');
     } catch (err) {
+      console.log(err);
       const error = handleErrors(err as Error);
       if (error !== undefined) {
         return error;

@@ -22,8 +22,8 @@ import ModalLoader from '../components/UI/Loader/ModalLoader';
 const Login: NextPage = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { signIn } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const ctx = useContext(AuthContext);
 
   // const { push } = useRouter();
   const toast = useToast();
@@ -59,31 +59,29 @@ const Login: NextPage = () => {
       email, password,
     };
 
-    // const result = await signIn(data);
-    await signIn(data);
+    const result = await ctx.signIn(data);
     setIsLoading(false);
-    // if (!result) {
-    //   toast({
-    //     title: '😔',
-    //     description: 'Não foi possível fazer login. Verifique se e-mail ou senha estão errados',
-    //     status: 'error',
-    //     ...toastConfig,
-    //   });
-    // } else {
-    //   toast({
-    //     title: '👏',
-    //     description: 'Login efetuado com sucesso!',
-    //     status: 'success',
-    //     ...toastConfig,
-    //   });
-    //   push('/dashboard', '/dashboard');
-    // }
+    if (!result) {
+      toast({
+        title: '😔',
+        description: 'Não foi possível fazer login. Verifique se e-mail ou senha estão errados',
+        status: 'error',
+        ...toastConfig,
+      });
+    } else {
+      toast({
+        title: '👏',
+        description: 'Login efetuado com sucesso!',
+        status: 'success',
+        ...toastConfig,
+      });
+      // push('/dashboard', '/dashboard');
+    }
   };
 
   return (
     <>
-      {/* {isLoading && <ModalLoader isOpen={isLoading} />} */}
-      <ModalLoader isOpen={isLoading} />
+      {isLoading && <ModalLoader isOpen={isLoading} />}
       <SEO title="Login | Atelier do Chá" description="User login page" />
       <Flex
         flexDir="column"
