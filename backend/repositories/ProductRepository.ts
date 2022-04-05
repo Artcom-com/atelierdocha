@@ -58,7 +58,7 @@ export default class ProductRepository implements ProductCases {
   }
 
   async update(id: string, infos: Partial<ProductModel>): Promise<void> {
-    this.checkIfDBIsConnected();
+    await this.checkIfDBIsConnected();
 
     await (this.db as Db).collection('products').updateOne({ _id: new ObjectId(id) }, {
       $set: {

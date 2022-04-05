@@ -7,8 +7,9 @@ import {
 } from '@chakra-ui/react';
 // import { GetServerSideProps } from 'next';
 // import { parseCookies } from 'nookies';
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 // import Head from 'next/head';
+import { parseCookies } from 'nookies';
 import BasicInput from '../../components/UI/Input/BasicInput';
 import Form from '../../components/Layout/Form/Form';
 import { validationField } from '../../utils/validations';
@@ -209,3 +210,20 @@ const Create: NextPage = () => {
 };
 
 export default Create;
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { authToken } = parseCookies(ctx);
+
+  if (authToken === undefined || authToken === null) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
