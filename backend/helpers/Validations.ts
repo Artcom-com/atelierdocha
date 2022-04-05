@@ -4,8 +4,12 @@ import { UserModel } from '../data/model/UserModel';
 import { HttpErrors } from '../errors/HttpErrors';
 
 export default class Validations {
-  validtionUnique(body: unknown | undefined) {
-    if (body === undefined || body === '') {
+  validtionInfo(info: unknown | undefined) {
+    if (info === undefined || info === '') {
+      throw new HttpErrors.BadRequest('Não foi possível obter nada com os dados enviados.');
+    }
+
+    if (info instanceof String && validationField(info as string)) {
       throw new HttpErrors.BadRequest('Não foi possível obter os dados enviados.');
     }
   }

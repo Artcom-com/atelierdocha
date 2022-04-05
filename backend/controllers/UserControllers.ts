@@ -16,11 +16,12 @@ export default class UserController {
 
   async add(req: NextApiRequest): Promise<HttpResponse> {
     try {
-      const { email, password } = req.body.user as UserModel;
+      const { email, password } = req.body as UserModel;
       this.validations.validateUser({ email, password });
       this.repository.add({ email, password });
       return ok('Usuário criado com sucesso!');
     } catch (err) {
+      console.log(err);
       const error = handleErrors(err as Error);
       if (error !== undefined) {
         return error;
@@ -32,7 +33,7 @@ export default class UserController {
   async findById(req: NextApiRequest): Promise<HttpResponse> {
     try {
       const { id } = req.query;
-      this.validations.validtionUnique(String(id));
+      this.validations.validtionInfo(String(id));
       const user = await this.repository.findById(String(id));
       this.validations.checkIfExists(user, 'Usuário');
       return okWithContent(user);
@@ -63,9 +64,9 @@ export default class UserController {
   async update(req: NextApiRequest): Promise<HttpResponse> {
     try {
       const { id } = req.query;
-      const { email, password } = req.body.user as UserModel;
+      const { email, password } = req.body as UserModel;
 
-      this.validations.validtionUnique(id);
+      this.validations.validtionInfo(id);
       this.populateUserInfos({ email, password });
 
       await this.repository.update(String(id), { email, password });
@@ -84,7 +85,7 @@ export default class UserController {
     try {
       const { id } = req.query;
 
-      this.validations.validtionUnique(id);
+      this.validations.validtionInfo(id);
 
       await this.repository.delete(String(id));
 

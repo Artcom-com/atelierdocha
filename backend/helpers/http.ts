@@ -1,5 +1,6 @@
 import { NextApiRequest } from 'next';
 import { ProductModel } from '../data/model/ProductModel';
+import { UserModel } from '../data/model/UserModel';
 import { HttpErrors } from '../errors/HttpErrors';
 
 export interface HttpResponse {
@@ -24,6 +25,14 @@ export const ok = (message: string): HttpResponse => ({
 export const okWithContent = (content: unknown): HttpResponse => ({
   statusCode: 200,
   content,
+});
+
+export const okWithPayload = (payload: string, userInfos: Omit<UserModel, 'password'>): HttpResponse => ({
+  statusCode: 200,
+  payload,
+  content: {
+    userInfo: userInfos,
+  },
 });
 
 export const created = (message: string): HttpResponse => ({
