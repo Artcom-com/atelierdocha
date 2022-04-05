@@ -55,19 +55,6 @@ const Edit = ({
       return;
     }
 
-    // TODO: Aqui é para validar se tá ou não tendo imagem
-
-    // if (image === undefined) {
-    //   toast({
-    //     title: '🤨',
-    //     description: 'Imagem inválida.',
-    //     status: 'error',
-    //     ...toastConfig,
-    //   });
-    //   setIsLoading(false);
-    //   return;
-    // }
-
     const data = new FormData();
 
     data.append('name', productName);
