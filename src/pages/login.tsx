@@ -1,5 +1,5 @@
 import React, {
-  FormEvent, useState,
+  FormEvent, useContext, useState,
 } from 'react';
 // import { useRouter } from 'next/router';
 import {
@@ -14,15 +14,16 @@ import Form from '../components/Layout/Form/Form';
 import { validateEmail, validationField } from '../utils/validations';
 import toastConfig from '../utils/config/toastConfig';
 // import ModalLoader from '../components/Loader/ModalLoader';
-// import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 import FormHeader from '../components/Layout/Form/FormHeader';
 import SEO from '../components/SEO';
+import ModalLoader from '../components/UI/Loader/ModalLoader';
 
 const Login: NextPage = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  // const { signIn } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { signIn } = useContext(AuthContext);
 
   // const { push } = useRouter();
   const toast = useToast();
@@ -54,11 +55,12 @@ const Login: NextPage = () => {
       return;
     }
 
-    // const data = {
-    //   email, password,
-    // };
+    const data = {
+      email, password,
+    };
 
     // const result = await signIn(data);
+    await signIn(data);
     setIsLoading(false);
     // if (!result) {
     //   toast({
@@ -80,8 +82,8 @@ const Login: NextPage = () => {
 
   return (
     <>
-      {/* {isLoading && <ModalLoader isOpen={isLoading} />}
-      <SEO title="p.$_ | Login de usuário" description="User login page" /> */}
+      {/* {isLoading && <ModalLoader isOpen={isLoading} />} */}
+      <ModalLoader isOpen={isLoading} />
       <SEO title="Login | Atelier do Chá" description="User login page" />
       <Flex
         flexDir="column"

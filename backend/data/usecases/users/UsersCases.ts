@@ -6,3 +6,8 @@ export interface UsersCases {
   update(id: string, infos: UserModel): Promise<void>
   delete(id: string): Promise<void>
 }
+
+export interface LoginProps {
+  email: string
+  password: string
+}
