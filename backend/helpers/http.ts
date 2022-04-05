@@ -30,9 +30,7 @@ export const okWithContent = (content: unknown): HttpResponse => ({
 export const okWithPayload = (payload: string, userInfos: Omit<UserModel, 'password'>): HttpResponse => ({
   statusCode: 200,
   payload,
-  content: {
-    userInfo: userInfos,
-  },
+  content: userInfos,
 });
 
 export const created = (message: string): HttpResponse => ({

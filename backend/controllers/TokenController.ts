@@ -50,12 +50,10 @@ export default class TokenController {
         email,
       }, '2d');
 
-      const userInfo = {
+      return okWithPayload(payload, {
         id: user.id,
         email,
-      };
-
-      return okWithPayload(payload, userInfo);
+      });
     } catch (err) {
       console.log(err);
       const error = handleErrors(err as Error);
