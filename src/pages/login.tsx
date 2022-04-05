@@ -1,19 +1,16 @@
 import React, {
   FormEvent, useContext, useState,
 } from 'react';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import {
   Button, ButtonGroup, chakra, Flex, Grid, useToast,
 } from '@chakra-ui/react';
-// import { GetServerSideProps } from 'next';
-// import { parseCookies } from 'nookies';
-import { NextPage } from 'next';
-// import Head from 'next/head';
+import { GetServerSideProps, NextPage } from 'next';
+import { parseCookies } from 'nookies';
 import BasicInput from '../components/UI/Input/BasicInput';
 import Form from '../components/Layout/Form/Form';
 import { validateEmail, validationField } from '../utils/validations';
 import toastConfig from '../utils/config/toastConfig';
-// import ModalLoader from '../components/Loader/ModalLoader';
 import { AuthContext } from '../context/AuthContext';
 import FormHeader from '../components/Layout/Form/FormHeader';
 import SEO from '../components/SEO';
@@ -25,7 +22,7 @@ const Login: NextPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const ctx = useContext(AuthContext);
 
-  // const { push } = useRouter();
+  const { push } = useRouter();
   const toast = useToast();
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
@@ -75,7 +72,7 @@ const Login: NextPage = () => {
         status: 'success',
         ...toastConfig,
       });
-      // push('/dashboard', '/dashboard');
+      push('/dashboard', '/dashboard');
     }
   };
 
@@ -125,3 +122,19 @@ const Login: NextPage = () => {
 };
 
 export default Login;
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { authToken } = parseCookies(ctx);
+  if (authToken) {
+    return {
+      redirect: {
+        destination: '/dashboard',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};

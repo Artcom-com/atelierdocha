@@ -6,6 +6,7 @@ import {
 } from '@chakra-ui/react';
 // import { parseCookies } from 'nookies';
 import { GetServerSideProps } from 'next';
+import { parseCookies } from 'nookies';
 import BasicInput from '../../components/UI/Input/BasicInput';
 import Form from '../../components/Layout/Form/Form';
 import { validationField } from '../../utils/validations';
@@ -206,7 +207,19 @@ export default Edit;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { id } = ctx.query;
+  const { authToken } = parseCookies(ctx);
+
   const response = await api.get(`products/${id}`);
+
+  if (authToken === undefined || authToken === null) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
   if (response.data.error) {
     return {
       redirect: {
