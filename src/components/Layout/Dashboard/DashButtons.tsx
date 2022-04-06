@@ -12,7 +12,7 @@ export interface DashButtonsProps {
 
 const DashButtons = ({ pinned, id }: DashButtonsProps) => {
   const productCtx = useContext(ProductContext);
-  const { push, reload } = useRouter();
+  const { push } = useRouter();
   const toast = useToast();
 
   const handleDeleteProduct = async () => {

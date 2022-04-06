@@ -44,7 +44,6 @@ const Edit = ({
     e.preventDefault();
     setIsLoading(true);
     // eslint-disable-next-line no-console
-    console.log(isLoading);
     if (validationField(productName) || validationField(productPrice)) {
       toast({
         title: '🤨',

@@ -2,10 +2,11 @@
 /* eslint-disable react/prop-types */
 import {
   Box,
-  Flex, Grid, Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr, IconButton,
+  Flex, Grid, Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr, IconButton, useToast, Button, ButtonGroup, chakra,
 } from '@chakra-ui/react';
 import { GetServerSideProps, NextPage } from 'next';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { parseCookies } from 'nookies';
 import React, { useContext, useEffect, useState } from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
@@ -13,18 +14,20 @@ import { ProductModel } from '../../backend/data/model/ProductModel';
 import DashButtons from '../components/Layout/Dashboard/DashButtons';
 import Header from '../components/Layout/Dashboard/Header';
 import SEO from '../components/SEO';
-import { AuthContext } from '../context/AuthContext';
 import ProductContext from '../context/products/ProductContext';
 import api from '../services/fetchAPI/init';
+import toastConfig from '../utils/config/toastConfig';
 
 export interface DashboardProps {
   products: ProductModel[]
 }
 
 const Dashboard: NextPage<DashboardProps> = ({ products }) => {
-  const ctx = useContext(AuthContext);
   const productsCtx = useContext(ProductContext);
-  const [renderCurrentProducts, setRenderCurrentProducts] = useState<ProductModel[]>(products);
+  const [, setRenderCurrentProducts] = useState<ProductModel[]>(products);
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const { push } = useRouter();
+  const toast = useToast();
 
   useEffect(() => {
     for (const product of products) {
@@ -46,6 +49,39 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
 
   const handleCheckIsPinned = (product: ProductModel): boolean => product.pinned || (productsCtx.pinnedList.indexOf(product.id as string) > -1);
 
+  const handlePassNextPage = async (): Promise<void> => {
+    const response = await api.get(`products/pagination/${currentPage + 1}`);
+    const nextProduct = response.data.content as ProductModel[];
+
+    if (nextProduct.length === 0 || nextProduct === undefined) {
+      toast({
+        title: '😊',
+        description: 'Sem mais produtos!',
+        status: 'success',
+        ...toastConfig,
+      });
+
+      return;
+    }
+
+    productsCtx.handleAddProducts(nextProduct);
+    productsCtx.handleAddProductsInCurrentPage(nextProduct);
+
+    const nextPage = currentPage + 1;
+    setCurrentPage(nextPage);
+  };
+
+  const handlePassPrevPage = async (): Promise<void> => {
+    if (currentPage !== 0) {
+      const response = await api.get(`products/pagination/${currentPage - 1}`);
+      const nextProduct = response.data.content as ProductModel[];
+
+      productsCtx.handleAddProductsInCurrentPage(nextProduct);
+      const prevPage = currentPage - 1;
+      setCurrentPage(prevPage);
+    }
+  };
+
   return (
     <>
       <SEO title="Dashboard | Atelier do Chá" description="Dashboard page" />
@@ -60,8 +96,25 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
           px="1em"
           boxSizing="border-box"
         >
-          <Flex bg="#FFFFFF">{ctx.user?.userInfo.email}</Flex>
-          <Flex bg="papayawhip" w="full" alignItems="center" justifyContent="flex-start" flexDir="column">
+          <Flex
+            bg="#9bb977"
+            alignItems="center"
+            flexDir="column"
+            padding="2em"
+          >
+            <chakra.h3 color="#fff" fontWeight="700" p="0.5em" fontSize="4xl">Opções</chakra.h3>
+            <ButtonGroup>
+              <Button
+                size="lg"
+                h="70px"
+                onClick={() => push('/products/create', '/products/create')}
+              >
+                Add novo produto
+
+              </Button>
+            </ButtonGroup>
+          </Flex>
+          <Flex bg="#9bb977" w="full" alignItems="center" justifyContent="flex-start" flexDir="column">
             <TableContainer w="100%">
               <Table variant="unset" size="lg" fontSize={{ base: '14px', md: '24px' }}>
                 <Thead bg="#789341">
@@ -101,17 +154,26 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
                     <Th color="#fff" textAlign="center" border="2px solid #fff">Nome</Th>
                     <Th color="#fff" textAlign="center" border="2px solid #fff">Preço</Th>
                     <Th color="#fff" textAlign="center" border="2px solid #fff">Fixado</Th>
-                    <Th color="#fff" textAlign="center" border="px solid #fff">Actions</Th>
+                    <Th color="#fff" textAlign="center" border="2px solid #fff">Actions</Th>
                   </Tr>
                 </Tfoot>
               </Table>
             </TableContainer>
-            <Flex>
+            <Flex
+              p="3em"
+              gap={2}
+            >
               <IconButton
                 bg="#789341"
                 color="#fff"
                 aria-label="Call Sage"
                 fontSize="20px"
+                _hover={{
+                  bg: '#789341',
+                  opacity: '0.5',
+                }}
+                disabled={currentPage === 0}
+                onClick={() => handlePassPrevPage()}
                 icon={<AiOutlineArrowLeft />}
               />
               <IconButton
@@ -119,6 +181,11 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
                 color="#fff"
                 aria-label="Call Sage"
                 fontSize="20px"
+                _hover={{
+                  bg: '#789341',
+                  opacity: '0.5',
+                }}
+                onClick={() => handlePassNextPage()}
                 icon={<AiOutlineArrowRight />}
               />
             </Flex>
