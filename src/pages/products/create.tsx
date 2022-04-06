@@ -1,23 +1,19 @@
 import React, {
   FormEvent, useState, ChangeEvent,
 } from 'react';
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import {
   Button, ButtonGroup, chakra, Flex, FormLabel, Grid, Input, useColorModeValue, useToast, Image,
 } from '@chakra-ui/react';
-// import { GetServerSideProps } from 'next';
-// import { parseCookies } from 'nookies';
 import { GetServerSideProps, NextPage } from 'next';
-// import Head from 'next/head';
 import { parseCookies } from 'nookies';
 import BasicInput from '../../components/UI/Input/BasicInput';
 import Form from '../../components/Layout/Form/Form';
 import { validationField } from '../../utils/validations';
 import toastConfig from '../../utils/config/toastConfig';
-// import ModalLoader from '../components/Loader/ModalLoader';
-// import { AuthContext } from '../context/AuthContext';
 import SEO from '../../components/SEO';
 import api from '../../services/fetchAPI/init';
+import ModalLoader from '../../components/UI/Loader/ModalLoader';
 
 const Create: NextPage = () => {
   const [name, setName] = useState<string>('');
@@ -26,7 +22,7 @@ const Create: NextPage = () => {
   const [image, setImage] = useState<File>();
   const [previewImage, setPreviewImage] = useState<string>('');
 
-  // const { push } = useRouter();
+  const { push } = useRouter();
   const toast = useToast();
 
   function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
@@ -44,8 +40,6 @@ const Create: NextPage = () => {
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
     setIsLoading(true);
-    // eslint-disable-next-line no-console
-    console.log(isLoading);
     if (validationField(name) || validationField(price)) {
       toast({
         title: '🤨',
@@ -91,13 +85,13 @@ const Create: NextPage = () => {
         status: 'success',
         ...toastConfig,
       });
-      // push('/dashboard', '/dashboard');
+      push('/dashboard', '/dashboard');
     }
   };
 
   return (
     <>
-      {/* {isLoading && <ModalLoader isOpen={isLoading} />} */}
+      {isLoading && <ModalLoader isOpen={isLoading} />}
       <SEO title="Adicionar produto | Atelier do Chá" description="User login page" />
       <Flex
         flexDir="column"
@@ -198,6 +192,7 @@ const Create: NextPage = () => {
                   bg: '#C0B90E',
                 }}
                 margin="0 !important"
+                onClick={() => push('/dashboard', '/dashboard')}
               >
                 Voltar
               </Button>

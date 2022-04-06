@@ -29,7 +29,6 @@ const Login: NextPage = () => {
     e.preventDefault();
     setIsLoading(true);
     // eslint-disable-next-line no-console
-    console.log(isLoading);
     if (validationField(email) || validationField(password)) {
       toast({
         title: '🤨',

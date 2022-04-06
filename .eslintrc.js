@@ -39,5 +39,6 @@ module.exports = {
     'import/extensions': 'off',
     'class-methods-use-this': 'off',
     '@typescript-eslint/no-namespace': 'off',
+    'max-len': 'off',
   },
 };

@@ -79,7 +79,16 @@ export default class ProductRepository implements ProductCases {
   async pagination(page: number): Promise<ProductModel[]> {
     await this.checkIfDBIsConnected();
 
-    const products = await (this.db as Db).collection<ProductModel>('products').find({}).skip(4 * page).limit(4)
+    const products = await (this.db as Db).collection<ProductModel>('products').find({}, {
+      projection: {
+        _id: 1,
+        name: 1,
+        price: 1,
+        pinned: 1,
+        imagePresentationUrl: 1,
+        id: '$_id',
+      },
+    }).skip(4 * page).limit(4)
       .toArray();
 
     return products;

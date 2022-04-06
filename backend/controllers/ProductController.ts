@@ -72,6 +72,7 @@ export default class ProductController {
       const { id } = req.query;
       this.validations.validtionInfo(id);
       const product = await this.repository.findById(String(id));
+      this.validations.checkIfExists(product, 'Produto');
       await this.imageHandle.delete(product.imagePresentationUrl);
       await this.repository.delete(String(id));
       return ok('Deletado com sucesso!');
@@ -149,6 +150,21 @@ export default class ProductController {
       const { page } = req.query;
       this.validations.validtionInfo(page);
       const products = await this.repository.pagination(Number(page));
+
+      return okWithContent(products);
+    } catch (err) {
+      console.log(err);
+      const error = handleErrors(err as Error);
+      if (error !== undefined) {
+        return error;
+      }
+      return serverError('Erro de servidor. Se persistir, contate um responsável.');
+    }
+  }
+
+  async getPinneds(): Promise<HttpResponse> {
+    try {
+      const products = await this.repository.findPinneds();
 
       return okWithContent(products);
     } catch (err) {

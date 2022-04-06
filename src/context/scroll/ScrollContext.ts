@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
-import { RefObject, createContext } from 'react';
+import { createContext } from 'react';
 
 export type RefFunction = () => void;
 export interface ScrollContextProps {

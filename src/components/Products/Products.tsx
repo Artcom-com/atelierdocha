@@ -4,10 +4,15 @@ import React, {
 import {
   Flex, chakra, Grid, useMediaQuery,
 } from '@chakra-ui/react';
-import ProductsCard, { ProductsCardProps } from './ProcutcsCard';
-import ScrollContext from '../../context/ScrollContext';
+import ProductsCard from './ProcutcsCard';
+import ScrollContext from '../../context/scroll/ScrollContext';
+import { ProductModel } from '../../../backend/data/model/ProductModel';
 
-const Products = (): JSX.Element => {
+export interface ProductsProps {
+  products: ProductModel[]
+}
+
+const Products = ({ products }: ProductsProps): JSX.Element => {
   const [isSmallScreen] = useMediaQuery('(max-width: 768px)');
   const [previewOffsetTop, setPreviewOffsetTop] = useState<number>(0);
 
@@ -34,29 +39,6 @@ const Products = (): JSX.Element => {
   useEffect(() => {
     scrollCtx.handleUpdateScrollToProducts(handleScrollToProducts);
   }, []);
-
-  const products: ProductsCardProps[] = [
-    {
-      imagePath: '/images/product-example.jpg',
-      title: 'Filtro especial - 100und (Finum®) ',
-      value: '34,90',
-    },
-    {
-      imagePath: '/images/product-example.jpg',
-      title: 'Filtro especial - 100und (Finum®) ',
-      value: '34,90',
-    },
-    {
-      imagePath: '/images/product-example.jpg',
-      title: 'Filtro especial - 100und (Finum®) ',
-      value: '34,90',
-    },
-    {
-      imagePath: '/images/product-example.jpg',
-      title: 'Filtro especial - 100und (Finum®) ',
-      value: '34,90',
-    },
-  ];
 
   return (
     <Flex
@@ -88,10 +70,10 @@ const Products = (): JSX.Element => {
         {products.map((product, index) => (
           <ProductsCard
           // eslint-disable-next-line react/no-array-index-key
-            key={product.title + index}
-            imagePath={product.imagePath}
-            title={product.title}
-            value={product.value}
+            key={product.name + index}
+            imagePath={product.imagePresentationUrl}
+            title={product.name}
+            value={product.price}
           />
         ))}
       </Grid>
