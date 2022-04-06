@@ -10,6 +10,7 @@ export interface ProductsProviderProps {
 export default function ProductProvider({ children }: ProductsProviderProps): JSX.Element {
   const [productsState, dispatchProductActions] = useReducer(productReducer, {
     hasChanged: false,
+    pinnedList: [],
     productList: [],
     productsInCurrentPage: [],
   });
@@ -31,7 +32,14 @@ export default function ProductProvider({ children }: ProductsProviderProps): JS
   const handleDeleteProduct = (id: string) => {
     dispatchProductActions({
       type: 'DELETE_PRODUCT',
-      productIndex: id,
+      productDeleteIndex: id,
+    });
+  };
+
+  const handlePinProduct = (id: string) => {
+    dispatchProductActions({
+      type: 'HANDLE_PIN_PRODUCT',
+      productPinId: id,
     });
   };
 
@@ -39,9 +47,11 @@ export default function ProductProvider({ children }: ProductsProviderProps): JS
     hasChanged: productsState.hasChanged,
     productList: productsState.productList,
     productsInCurrentPage: productsState.productsInCurrentPage,
+    pinnedList: productsState.pinnedList,
     handleAddProducts,
     handleDeleteProduct,
     handleAddProductsInCurrentPage,
+    handlePinProduct,
   }), [productsState]);
 
   return (

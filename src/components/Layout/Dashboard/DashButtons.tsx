@@ -24,13 +24,14 @@ const DashButtons = ({ pinned, id }: DashButtonsProps) => {
     await api.post(`products/pin/${id}`, {
       pinned: !pinned,
     });
-    reload();
     toast({
       title: '😊',
       description: pinned ? 'Desfixado com sucesso!' : 'Fixadao com sucesso!',
       status: 'success',
       ...toastConfig,
     });
+    productCtx.handlePinProduct(id);
+    // setTimeout(() => reload(), 1000);
   };
 
   const handleEdit = () => {

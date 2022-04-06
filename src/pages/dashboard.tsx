@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable react/prop-types */
 import {
   Box,
@@ -6,7 +7,7 @@ import {
 import { GetServerSideProps, NextPage } from 'next';
 import Image from 'next/image';
 import { parseCookies } from 'nookies';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { ProductModel } from '../../backend/data/model/ProductModel';
 import DashButtons from '../components/Layout/Dashboard/DashButtons';
@@ -23,11 +24,27 @@ export interface DashboardProps {
 const Dashboard: NextPage<DashboardProps> = ({ products }) => {
   const ctx = useContext(AuthContext);
   const productsCtx = useContext(ProductContext);
+  const [renderCurrentProducts, setRenderCurrentProducts] = useState<ProductModel[]>(products);
 
   useEffect(() => {
+    for (const product of products) {
+      if (product.pinned) {
+        productsCtx.handlePinProduct(product.id as string);
+      }
+    }
+
     productsCtx.handleAddProducts(products);
     productsCtx.handleAddProductsInCurrentPage(products);
   }, []);
+
+  useEffect(() => {
+    const handleSetCurrentProducts = () => {
+      setRenderCurrentProducts(productsCtx.productsInCurrentPage);
+    };
+    handleSetCurrentProducts();
+  }, [productsCtx.hasChanged]);
+
+  const handleCheckIsPinned = (product: ProductModel): boolean => product.pinned || (productsCtx.pinnedList.indexOf(product.id as string) > -1);
 
   return (
     <>
@@ -71,9 +88,9 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
                       </Td>
                       <Td textAlign="center" border="2px solid #fff" bg="#789341">{product.name}</Td>
                       <Td textAlign="center" border="2px solid #fff" bg="#789341">{product.price}</Td>
-                      <Td textAlign="center" border="2px solid #fff" bg="#789341">{product.pinned === true ? 'Fixado' : 'Não fixado'}</Td>
+                      <Td textAlign="center" border="2px solid #fff" bg="#789341">{handleCheckIsPinned(product) ? 'Fixado' : 'Não fixado'}</Td>
                       <Td textAlign="center" border="2px solid #fff" bg="#789341">
-                        <DashButtons id={product.id as string} pinned={product.pinned} />
+                        <DashButtons id={product.id as string} pinned={handleCheckIsPinned(product)} />
                       </Td>
                     </Tr>
                   ))}
@@ -117,7 +134,7 @@ export default Dashboard;
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { authToken } = parseCookies(ctx);
 
-  const result = await api.get('/products/pagination/1');
+  const result = await api.get('/products/pagination/0');
 
   if (authToken === undefined || authToken === null) {
     return {
