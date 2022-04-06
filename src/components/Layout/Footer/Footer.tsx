@@ -4,7 +4,7 @@ import React, {
 import {
   Box, chakra, Flex, Grid, Image, Text, useMediaQuery,
 } from '@chakra-ui/react';
-import ScrollContext from '../../../context/ScrollContext';
+import ScrollContext from '../../../context/scroll/ScrollContext';
 // import classes from './Footer.module.css';
 
 const Footer = (): JSX.Element => {

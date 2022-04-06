@@ -6,7 +6,7 @@ import '../styles/globals.css';
 import '../styles/reset.css';
 // eslint-disable-next-line import/no-unresolved
 import { theme } from '../styles/theme';
-import ScrollProvider from '../context/ScrollProvider';
+import ScrollProvider from '../context/scroll/ScrollProvider';
 import AuthProvider from '../context/AuthContext';
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {

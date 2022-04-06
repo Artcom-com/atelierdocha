@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react';
 import AboutBanner from './AboutBanner';
 import Benefits from './Benefits';
-import ScrollContext from '../../context/ScrollContext';
+import ScrollContext from '../../context/scroll/ScrollContext';
 
 const About = () => {
   const [isSmallScreen] = useMediaQuery('(max-width: 768px)');

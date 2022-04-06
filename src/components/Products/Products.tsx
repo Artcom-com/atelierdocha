@@ -5,7 +5,7 @@ import {
   Flex, chakra, Grid, useMediaQuery,
 } from '@chakra-ui/react';
 import ProductsCard, { ProductsCardProps } from './ProcutcsCard';
-import ScrollContext from '../../context/ScrollContext';
+import ScrollContext from '../../context/scroll/ScrollContext';
 
 const Products = (): JSX.Element => {
   const [isSmallScreen] = useMediaQuery('(max-width: 768px)');

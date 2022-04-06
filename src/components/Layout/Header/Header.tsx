@@ -5,7 +5,7 @@ import {
 import Logo from '../../UI/Logo';
 import Line from './Line';
 import SideMenu from './SideMenu';
-import ScrollContext from '../../../context/ScrollContext';
+import ScrollContext from '../../../context/scroll/ScrollContext';
 
 const Header = (): JSX.Element => {
   const scrollCtx = useContext(ScrollContext);

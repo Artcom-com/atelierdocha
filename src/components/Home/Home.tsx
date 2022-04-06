@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react';
 import FontBorder from '../UI/FontBorder/FontBorder';
 import HomeButton from './HomeButton/HomeButton';
-import ScrollContext from '../../context/ScrollContext';
+import ScrollContext from '../../context/scroll/ScrollContext';
 
 const Home = (): JSX.Element => {
   const [isSmallScreen] = useMediaQuery('(max-width: 768px)');

@@ -12,6 +12,12 @@ const DashButtons = ({ pinned, id }: DashButtonsProps) => {
     await api.delete(`products/${id}`);
   };
 
+  const handleFixProduct = async () => {
+    await api.post(`products/pin/${id}`, {
+      pinned: !pinned,
+    });
+  };
+
   if (pinned) {
     return (
       <>
@@ -26,9 +32,7 @@ const DashButtons = ({ pinned, id }: DashButtonsProps) => {
             variant="link"
             w="20%"
             size="xs"
-            onClick={(() => {
-              console.log('des');
-            })}
+            onClick={() => handleFixProduct()}
           >
             Desfixar
           </Button>
@@ -52,9 +56,7 @@ const DashButtons = ({ pinned, id }: DashButtonsProps) => {
           w="100%"
           size="xs"
           color="green"
-          onClick={(() => {
-            console.log('fix');
-          })}
+          onClick={() => handleFixProduct()}
           disabled={pinned}
         >
           Fixar

@@ -4,7 +4,7 @@ import {
 } from '@chakra-ui/react';
 import NavItem from './NavItem';
 import Logo from '../../UI/Logo';
-import ScrollContext, { RefFunction } from '../../../context/ScrollContext';
+import ScrollContext, { RefFunction } from '../../../context/scroll/ScrollContext';
 
 export interface SideContentProps {
   onClose: () => void
