@@ -1,7 +1,9 @@
-import { Button, ButtonGroup } from '@chakra-ui/react';
+import { Button, ButtonGroup, useToast } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import ProductContext from '../../../context/products/ProductContext';
 import api from '../../../services/fetchAPI/init';
+import toastConfig from '../../../utils/config/toastConfig';
 
 export interface DashButtonsProps {
   id: string
@@ -10,16 +12,29 @@ export interface DashButtonsProps {
 
 const DashButtons = ({ pinned, id }: DashButtonsProps) => {
   const productCtx = useContext(ProductContext);
+  const { push, reload } = useRouter();
+  const toast = useToast();
+
   const handleDeleteProduct = async () => {
     productCtx.handleDeleteProduct(id);
     await api.delete(`products/${id}`);
   };
 
   const handleFixProduct = async () => {
-    productCtx.hasChanged = !productCtx.hasChanged;
     await api.post(`products/pin/${id}`, {
       pinned: !pinned,
     });
+    reload();
+    toast({
+      title: '😊',
+      description: pinned ? 'Desfixado com sucesso!' : 'Fixadao com sucesso!',
+      status: 'success',
+      ...toastConfig,
+    });
+  };
+
+  const handleEdit = () => {
+    push('/products/[id]', `/products/${id}`);
   };
 
   if (pinned) {
@@ -33,9 +48,13 @@ const DashButtons = ({ pinned, id }: DashButtonsProps) => {
         >
           <Button
             fontSize="18px"
-            variant="link"
-            w="20%"
-            size="xs"
+            variant="outline"
+            w="80%"
+            h="50px"
+            color="#fff"
+            _hover={{
+              bg: 'orange',
+            }}
             onClick={() => handleFixProduct()}
           >
             Desfixar
@@ -56,10 +75,13 @@ const DashButtons = ({ pinned, id }: DashButtonsProps) => {
       >
         <Button
           fontSize="18px"
-          variant="link"
-          w="100%"
-          size="xs"
-          color="green"
+          variant="outline"
+          w="80%"
+          h="50px"
+          color="#fff"
+          _hover={{
+            bg: 'green',
+          }}
           onClick={() => handleFixProduct()}
           disabled={pinned}
         >
@@ -67,23 +89,30 @@ const DashButtons = ({ pinned, id }: DashButtonsProps) => {
         </Button>
         <Button
           fontSize="18px"
-          variant="link"
-          w="100%"
-          size="xs"
-          color="orange"
+          variant="outline"
+          w="80%"
+          h="50px"
+          color="#fff"
+          _hover={{
+            bg: 'orange',
+          }}
           style={{
             margin: '0px !important',
           }}
-          onClick={() => console.log('edit')}
+          onClick={() => handleEdit()}
         >
           Editar
         </Button>
         <Button
           fontSize="18px"
-          variant="link"
-          w="100%"
-          size="xs"
-          color="red"
+          variant="outline"
+          w="80%"
+          h="50px"
+          // size="lg"
+          color="#fff"
+          _hover={{
+            bg: 'red',
+          }}
           style={{
             margin: '0px !important',
           }}

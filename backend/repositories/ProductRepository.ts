@@ -85,6 +85,7 @@ export default class ProductRepository implements ProductCases {
         name: 1,
         price: 1,
         pinned: 1,
+        imagePresentationUrl: 1,
         id: '$_id',
       },
     }).skip(4 * page).limit(4)

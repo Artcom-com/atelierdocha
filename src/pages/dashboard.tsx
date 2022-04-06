@@ -1,10 +1,13 @@
 /* eslint-disable react/prop-types */
 import {
-  Flex, Grid, Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr,
+  Box,
+  Flex, Grid, Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr, IconButton,
 } from '@chakra-ui/react';
 import { GetServerSideProps, NextPage } from 'next';
+import Image from 'next/image';
 import { parseCookies } from 'nookies';
 import React, { useContext, useEffect } from 'react';
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { ProductModel } from '../../backend/data/model/ProductModel';
 import DashButtons from '../components/Layout/Dashboard/DashButtons';
 import Header from '../components/Layout/Dashboard/Header';
@@ -30,7 +33,7 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
     <>
       <SEO title="Dashboard | Atelier do Chá" description="Dashboard page" />
       <Header />
-      <Flex w="100%" h="100%" mt="6em" alignItems="center" justifyContent="center" flexDir="column">
+      <Flex w="100%" h="80vh" mt="6em" alignItems="center" justifyContent="center" flexDir="column">
         <Grid
           templateRows="repeat(1, 1fr)"
           templateColumns="15% 80%"
@@ -41,24 +44,35 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
           boxSizing="border-box"
         >
           <Flex bg="#FFFFFF">{ctx.user?.userInfo.email}</Flex>
-          <Flex bg="papayawhip" w="full" justifyContent="center" alignItems="center">
+          <Flex bg="papayawhip" w="full" alignItems="center" justifyContent="flex-start" flexDir="column">
             <TableContainer w="100%">
-              <Table variant="striped" size="lg" fontSize={{ base: '14px', md: '24px' }}>
+              <Table variant="unset" size="lg" fontSize={{ base: '14px', md: '24px' }}>
                 <Thead bg="#789341">
                   <Tr>
-                    <Th color="#fff" textAlign="center" border="1px solid #fff">Nome</Th>
-                    <Th color="#fff" textAlign="center" border="1px solid #fff">Preço</Th>
-                    <Th color="#fff" textAlign="center" border="1px solid #fff">Fixado</Th>
-                    <Th color="#fff" textAlign="center" border="1px solid #fff">Actions</Th>
+                    <Th color="#fff" textAlign="center" border="2px solid #fff">Imagem</Th>
+                    <Th color="#fff" textAlign="center" border="2px solid #fff">Nome</Th>
+                    <Th color="#fff" textAlign="center" border="2px solid #fff">Preço</Th>
+                    <Th color="#fff" textAlign="center" border="2px solid #fff">Fixado</Th>
+                    <Th color="#fff" textAlign="center" border="2px solid #fff">Actions</Th>
                   </Tr>
                 </Thead>
                 <Tbody>
                   {productsCtx.productsInCurrentPage.map((product) => (
-                    <Tr key={product.name + product.id}>
-                      <Td>{product.name}</Td>
-                      <Td>{product.price}</Td>
-                      <Td>{product.pinned === true ? 'Fixado' : 'Não fixado'}</Td>
-                      <Td>
+                    <Tr color="#fff" key={product.name + product.id} border="2px solid #fff" bg="#789341">
+                      <Td border="2px solid #fff" bg="#789341" alignItems="center">
+                        <Box position="relative" w="100%" h="100px">
+                          <Image
+                            objectFit="fill"
+                            layout="fill"
+                            src={`${product.imagePresentationUrl}`}
+                            alt="Product Image"
+                          />
+                        </Box>
+                      </Td>
+                      <Td textAlign="center" border="2px solid #fff" bg="#789341">{product.name}</Td>
+                      <Td textAlign="center" border="2px solid #fff" bg="#789341">{product.price}</Td>
+                      <Td textAlign="center" border="2px solid #fff" bg="#789341">{product.pinned === true ? 'Fixado' : 'Não fixado'}</Td>
+                      <Td textAlign="center" border="2px solid #fff" bg="#789341">
                         <DashButtons id={product.id as string} pinned={product.pinned} />
                       </Td>
                     </Tr>
@@ -66,14 +80,31 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
                 </Tbody>
                 <Tfoot bg="#789341">
                   <Tr>
-                    <Th color="#fff" textAlign="center" border="1px solid #fff">Nome</Th>
-                    <Th color="#fff" textAlign="center" border="1px solid #fff">Preço</Th>
-                    <Th color="#fff" textAlign="center" border="1px solid #fff">Fixado</Th>
-                    <Th color="#fff" textAlign="center" border="1px solid #fff">Actions</Th>
+                    <Th color="#fff" textAlign="center" border="2px solid #fff">Imagem</Th>
+                    <Th color="#fff" textAlign="center" border="2px solid #fff">Nome</Th>
+                    <Th color="#fff" textAlign="center" border="2px solid #fff">Preço</Th>
+                    <Th color="#fff" textAlign="center" border="2px solid #fff">Fixado</Th>
+                    <Th color="#fff" textAlign="center" border="px solid #fff">Actions</Th>
                   </Tr>
                 </Tfoot>
               </Table>
             </TableContainer>
+            <Flex>
+              <IconButton
+                bg="#789341"
+                color="#fff"
+                aria-label="Call Sage"
+                fontSize="20px"
+                icon={<AiOutlineArrowLeft />}
+              />
+              <IconButton
+                bg="#789341"
+                color="#fff"
+                aria-label="Call Sage"
+                fontSize="20px"
+                icon={<AiOutlineArrowRight />}
+              />
+            </Flex>
           </Flex>
         </Grid>
       </Flex>

@@ -54,7 +54,7 @@ const productReducer = (state: State, actions: Actions): State => {
 
     const productCurrentPageIndex = currentPageIndexList.indexOf(String(actions.productIndex));
 
-    if (productListIndex > -1) {
+    if (productCurrentPageIndex > -1) {
       state.productsInCurrentPage.splice(productListIndex, 1);
     }
 
