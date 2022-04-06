@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import {
-  Flex, Grid, Table, TableCaption, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr,
+  Flex, Grid, Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr,
 } from '@chakra-ui/react';
 import { GetServerSideProps, NextPage } from 'next';
 import { parseCookies } from 'nookies';
 import React, { useContext } from 'react';
 import { ProductModel } from '../../backend/data/model/ProductModel';
+import DashButtons from '../components/Layout/Dashboard/DashButtons';
 import Header from '../components/Layout/Dashboard/Header';
 import SEO from '../components/SEO';
 import { AuthContext } from '../context/AuthContext';
@@ -21,16 +22,17 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
     <>
       <SEO title="Dashboard | Atelier do Chá" description="Dashboard page" />
       <Header />
-      <Flex w="100%" h="80vh" justifyContent="flex-end" flexDir="column" position="absolute">
+      <Flex w="100%" h="100%" mt="6em" alignItems="center" justifyContent="center" flexDir="column">
         <Grid
           templateRows="repeat(1, 1fr)"
-          templateColumns="150px 90%"
+          templateColumns="15% 80%"
           w="100%"
-          h="90%"
+          h="100%"
           gap={4}
-          pr="1em"
+          px="1em"
+          boxSizing="border-box"
         >
-          <Flex bg="tomato">{ctx.user?.userInfo.email}</Flex>
+          <Flex bg="#FFFFFF">{ctx.user?.userInfo.email}</Flex>
           <Flex bg="papayawhip" w="full" justifyContent="center" alignItems="center">
             <TableContainer w="100%">
               <Table variant="striped" size="lg" fontSize={{ base: '14px', md: '24px' }}>
@@ -44,11 +46,13 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
                 </Thead>
                 <Tbody>
                   {products.map((product) => (
-                    <Tr>
+                    <Tr key={product.name + product.id}>
                       <Td>{product.name}</Td>
                       <Td>{product.price}</Td>
                       <Td>{product.pinned === true ? 'Fixado' : 'Não fixado'}</Td>
-                      <Td isNumeric>Deletar, editar</Td>
+                      <Td>
+                        <DashButtons id={product.id as string} pinned={product.pinned} />
+                      </Td>
                     </Tr>
                   ))}
                 </Tbody>

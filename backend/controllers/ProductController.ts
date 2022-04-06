@@ -72,6 +72,7 @@ export default class ProductController {
       const { id } = req.query;
       this.validations.validtionInfo(id);
       const product = await this.repository.findById(String(id));
+      this.validations.checkIfExists(product, 'Produto');
       await this.imageHandle.delete(product.imagePresentationUrl);
       await this.repository.delete(String(id));
       return ok('Deletado com sucesso!');
