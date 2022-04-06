@@ -2,7 +2,7 @@ import { Flex, Text } from '@chakra-ui/react';
 import React from 'react';
 import FontBorder from '../UI/FontBorder/FontBorder';
 
-const AboutBanner = () => (
+const AboutBanner = (): JSX.Element => (
   <Flex
     bgImage="/images/banners/banner-two.jpg"
     bgPosition="center"

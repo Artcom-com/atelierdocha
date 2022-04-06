@@ -4,12 +4,13 @@ import {
 } from '@chakra-ui/react';
 import { GetServerSideProps, NextPage } from 'next';
 import { parseCookies } from 'nookies';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ProductModel } from '../../backend/data/model/ProductModel';
 import DashButtons from '../components/Layout/Dashboard/DashButtons';
 import Header from '../components/Layout/Dashboard/Header';
 import SEO from '../components/SEO';
 import { AuthContext } from '../context/AuthContext';
+import ProductContext from '../context/products/ProductContext';
 import api from '../services/fetchAPI/init';
 
 export interface DashboardProps {
@@ -18,6 +19,13 @@ export interface DashboardProps {
 
 const Dashboard: NextPage<DashboardProps> = ({ products }) => {
   const ctx = useContext(AuthContext);
+  const productsCtx = useContext(ProductContext);
+
+  useEffect(() => {
+    productsCtx.handleAddProducts(products);
+    productsCtx.handleAddProductsInCurrentPage(products);
+  }, []);
+
   return (
     <>
       <SEO title="Dashboard | Atelier do Chá" description="Dashboard page" />
@@ -45,7 +53,7 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {products.map((product) => (
+                  {productsCtx.productsInCurrentPage.map((product) => (
                     <Tr key={product.name + product.id}>
                       <Td>{product.name}</Td>
                       <Td>{product.price}</Td>

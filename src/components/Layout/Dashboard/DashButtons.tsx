@@ -1,5 +1,6 @@
 import { Button, ButtonGroup } from '@chakra-ui/react';
-import React from 'react';
+import React, { useContext } from 'react';
+import ProductContext from '../../../context/products/ProductContext';
 import api from '../../../services/fetchAPI/init';
 
 export interface DashButtonsProps {
@@ -8,11 +9,14 @@ export interface DashButtonsProps {
 }
 
 const DashButtons = ({ pinned, id }: DashButtonsProps) => {
+  const productCtx = useContext(ProductContext);
   const handleDeleteProduct = async () => {
+    productCtx.handleDeleteProduct(id);
     await api.delete(`products/${id}`);
   };
 
   const handleFixProduct = async () => {
+    productCtx.hasChanged = !productCtx.hasChanged;
     await api.post(`products/pin/${id}`, {
       pinned: !pinned,
     });

@@ -8,13 +8,16 @@ import '../styles/reset.css';
 import { theme } from '../styles/theme';
 import ScrollProvider from '../context/scroll/ScrollProvider';
 import AuthProvider from '../context/AuthContext';
+import ProductProvider from '../context/products/ProductProvider';
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ChakraProvider theme={theme}>
       <AuthProvider>
         <ScrollProvider>
-          <Component {...pageProps} />
+          <ProductProvider>
+            <Component {...pageProps} />
+          </ProductProvider>
         </ScrollProvider>
       </AuthProvider>
     </ChakraProvider>
