@@ -67,7 +67,7 @@ const ProductsCard = ({ imagePath, title, value }: ProductsCardProps): JSX.Eleme
         </Flex>
       </Flex>
     </Flex>
-    <BuyButton whatsMessage="teste" />
+    <BuyButton whatsMessage={`Olá, gostaria de saber mais sobre o produto ${title} e de valor R$ ${value}.`} />
   </Flex>
 );
 
