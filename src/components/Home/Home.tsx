@@ -71,7 +71,6 @@ const Home = (): JSX.Element => {
 
         </Text>
       </Flex>
-      <HomeButton action="Acessar" />
       <Flex
         justifyContent={{ base: 'center', md: 'flex-end' }}
         mt="15px"

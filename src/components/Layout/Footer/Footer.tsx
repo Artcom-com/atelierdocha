@@ -70,13 +70,13 @@ const Footer = (): JSX.Element => {
       >
         <Flex
           h="full"
-          justifyContent="center"
+          justifyContent={{ base: 'center', xl: 'flex-start' }}
         >
           <Image
             src="/logo/footer-logo.svg"
             w="200px"
             h="200px"
-            alt="Whatsapp logo"
+            alt="Atelier do Chá logo"
           />
           <Box
             width="3px"
@@ -112,15 +112,19 @@ const Footer = (): JSX.Element => {
           >
             <Image
               src="/images/svgs/whatsapp-2.svg"
-              w={{ base: '40px', xl: '60px' }}
-              h={{ base: '40px', xl: '60px' }}
+              w={{ base: '40px', xl: '50px' }}
+              h={{ base: '40px', xl: '50px' }}
               alt="Whatsapp logo"
             />
 
             <Text
-              fontSize={{ base: '1.5em', xl: '2.5em' }}
+              fontSize={{ base: '1.5em', xl: '2em' }}
               color="#fff"
               fontWeight="700"
+              as="a"
+              rel="noopener noreferrer"
+              target="_blank"
+              href="https://api.whatsapp.com/send?phone=5527988689325&text=Ol%C3%A1%2C%20gostaria%20saber%20mais%20dos%20seus%20produtos."
             >
 
               (27) 98868-9325
@@ -132,6 +136,7 @@ const Footer = (): JSX.Element => {
         <Flex
           flexDir="column"
           gap={4}
+          ml={{ base: '0', md: '2em' }}
         >
           <Flex
             alignItems="center"
@@ -149,6 +154,10 @@ const Footer = (): JSX.Element => {
               fontSize={{ base: '1.5em', xl: '2em' }}
               color="#fff"
               fontWeight="700"
+              as="a"
+              href="mailto:sac@atelierdocha.com"
+              rel="noopener noreferrer"
+              target="_blank"
             >
 
               sac@atelierdocha.com
@@ -172,6 +181,10 @@ const Footer = (): JSX.Element => {
               fontSize={{ base: '1.5em', xl: '2em' }}
               color="#fff"
               fontWeight="700"
+              as="a"
+              href="https://www.instagram.com/atelierdocha/"
+              rel="noopener noreferrer"
+              target="_blank"
             >
 
               @atelierdocha
@@ -195,6 +208,10 @@ const Footer = (): JSX.Element => {
               fontSize={{ base: '1.5em', xl: '2em' }}
               color="#fff"
               fontWeight="700"
+              as="a"
+              href="https://pt-br.facebook.com/atelierdochabr/"
+              rel="noopener noreferrer"
+              target="_blank"
             >
 
               atelierdocha

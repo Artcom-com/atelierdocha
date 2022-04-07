@@ -20,13 +20,13 @@ export default function SEO({
   return (
     <Head>
       <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-      {/*
-      <meta name="keywords" content="agência, publicidade, marketing, comunicação, agência de publicidade, agência de marketing, agência de comunicação" />
+
+      <meta name="keywords" content="Chá, Bebidas, Atelier" />
       <meta property="og:image" content="https://res.cloudinary.com/artcompub/image/upload/v1647373969/artcom_gfwruj.png" />
       <meta name="twitter:card" content="summary" />
-      <meta property="og:url" content={`https://www.artcom.com.br/${site}`} />
+      {/* <meta property="og:url" content={`https://www.artcom.com.br/${site}`} /> */}
       <meta property="og:title" content={pageTitle} key="ogtitle" />
-      <meta property="og:description" content={description} key="ogdesc" /> */}
+      <meta property="og:description" content={description} key="ogdesc" />
       <title>{pageTitle}</title>
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       {description && <meta name="description" content={description} />}

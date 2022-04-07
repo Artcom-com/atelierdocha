@@ -13,7 +13,11 @@ const Header = (): JSX.Element => {
     <chakra.header display="flex" px={{ base: '1em', xl: '2.5em' }} pt={{ base: '0.5em', xl: '1.5em' }} flexDir="column">
       <Flex w="100%" justifyContent="flex-end">
         <HStack spacing={2} position={{ base: 'initial', xl: 'absolute' }}>
-          <a href="/">
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://api.whatsapp.com/send?phone=5527988689325&text=Ol%C3%A1%2C%20gostaria%20saber%20mais%20dos%20seus%20produtos."
+          >
             <Image
               src="/images/svgs/whatsapp.svg"
               w={{ base: '30px', xl: '40px' }}
@@ -21,7 +25,7 @@ const Header = (): JSX.Element => {
               alt="Whatsapp logo"
             />
           </a>
-          <a href="/">
+          <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/atelierdocha/">
             <Image
               src="/images/svgs/instagram.svg"
               w={{ base: '30px', xl: '40px' }}
