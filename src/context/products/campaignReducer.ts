@@ -90,6 +90,7 @@ const productReducer = (state: State, actions: Actions): State => {
       if (productId > -1) {
         state.pinnedList.splice(productId, 1);
       } else {
+        console.log('entrar');
         state.pinnedList.push(actions.productPinId);
       }
 

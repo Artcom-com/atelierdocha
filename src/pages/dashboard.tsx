@@ -24,7 +24,7 @@ export interface DashboardProps {
 
 const Dashboard: NextPage<DashboardProps> = ({ products }) => {
   const productsCtx = useContext(ProductContext);
-  const [, setRenderCurrentProducts] = useState<ProductModel[]>(products);
+  const [currentProducts, setRenderCurrentProducts] = useState<ProductModel[]>(products);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const { push } = useRouter();
   const toast = useToast();
@@ -45,9 +45,7 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
       setRenderCurrentProducts(productsCtx.productsInCurrentPage);
     };
     handleSetCurrentProducts();
-  }, [productsCtx.hasChanged]);
-
-  const handleCheckIsPinned = (product: ProductModel): boolean => product.pinned || (productsCtx.pinnedList.indexOf(product.id as string) > -1);
+  }, [productsCtx.productsInCurrentPage]);
 
   const handlePassNextPage = async (): Promise<void> => {
     const response = await api.get(`products/pagination/${currentPage + 1}`);
@@ -127,7 +125,7 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {productsCtx.productsInCurrentPage.map((product) => (
+                  {currentProducts.map((product) => (
                     <Tr color="#fff" key={product.name + product.id} border="2px solid #fff" bg="#789341">
                       <Td border="2px solid #fff" bg="#789341" alignItems="center">
                         <Box position="relative" w="100%" h="100px">
@@ -141,9 +139,9 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
                       </Td>
                       <Td textAlign="center" border="2px solid #fff" bg="#789341">{product.name}</Td>
                       <Td textAlign="center" border="2px solid #fff" bg="#789341">{product.price}</Td>
-                      <Td textAlign="center" border="2px solid #fff" bg="#789341">{handleCheckIsPinned(product) ? 'Fixado' : 'Não fixado'}</Td>
+                      <Td textAlign="center" border="2px solid #fff" bg="#789341">{productsCtx.pinnedList.indexOf(product.id as string) > -1 ? 'Fixado' : 'Não fixado'}</Td>
                       <Td textAlign="center" border="2px solid #fff" bg="#789341">
-                        <DashButtons id={product.id as string} pinned={handleCheckIsPinned(product)} />
+                        <DashButtons id={product.id as string} pinned={productsCtx.pinnedList.indexOf(product.id as string) > -1} />
                       </Td>
                     </Tr>
                   ))}
