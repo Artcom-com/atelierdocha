@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import connect from '../../../../backend/data/mongodb/mongodb';
 import makeProductController from '../../../../backend/factory/makeProductController';
 import { HttpResponse } from '../../../../backend/helpers/http';
+import withProtect from '../../../../backend/middlewares/withProtect';
 
 export const config = {
   api: {
@@ -10,7 +11,7 @@ export const config = {
   },
 };
 
-export default async function handler(
+async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Omit<HttpResponse, 'statusCode'>>,
 ) {
@@ -38,3 +39,5 @@ export default async function handler(
   }
   return res.status(response.statusCode).json({ content: response.content });
 }
+
+export default withProtect(handler);

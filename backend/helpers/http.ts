@@ -52,3 +52,8 @@ export const badRequest = (error: HttpErrors.BadRequest): HttpResponse => ({
   statusCode: error.getStatusCode,
   error: error.message,
 });
+
+export const unauthorized = (error: HttpErrors.Unauthorized): HttpResponse => ({
+  statusCode: error.getStatusCode,
+  error: error.message,
+});

@@ -34,7 +34,7 @@ export default class UserController {
   async findById(req: NextApiRequest): Promise<HttpResponse> {
     try {
       const { id } = req.query;
-      this.validations.validtionInfo(String(id));
+      this.validations.validationInfo(String(id));
       const user = await this.repository.findById(String(id));
       this.validations.checkIfExists(user, 'Usuário');
       return okWithContent(user);
@@ -68,7 +68,7 @@ export default class UserController {
       const { id } = req.query;
       const { email, password } = req.body as UserModel;
 
-      this.validations.validtionInfo(id);
+      this.validations.validationInfo(id);
       this.populateUserInfos({ email, password });
 
       await this.repository.update(String(id), { email, password });
@@ -88,7 +88,7 @@ export default class UserController {
     try {
       const { id } = req.query;
 
-      this.validations.validtionInfo(id);
+      this.validations.validationInfo(id);
 
       await this.repository.delete(String(id));
 

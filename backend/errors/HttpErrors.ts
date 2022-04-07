@@ -29,4 +29,17 @@ export namespace HttpErrors {
       return this.statusCode;
     }
   }
+
+  export class Unauthorized extends Error implements HttpError {
+    private readonly statusCode: number = 401;
+
+    constructor(message: string) {
+      super(message);
+      this.name = 'Unauthorized';
+    }
+
+    get getStatusCode(): number {
+      return this.statusCode;
+    }
+  }
 }

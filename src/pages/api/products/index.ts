@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import makeProductController from '../../../../backend/factory/makeProductController';
 import { HttpResponse } from '../../../../backend/helpers/http';
+import withProtect from '../../../../backend/middlewares/withProtect';
 
 export const config = {
   api: {
@@ -9,7 +10,7 @@ export const config = {
   },
 };
 
-export default async function handler(
+async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Omit<HttpResponse, 'statusCode'>>,
 ) {
@@ -20,3 +21,5 @@ export default async function handler(
   }
   return res.status(response.statusCode).json({ message: response.message });
 }
+
+export default withProtect(handler);

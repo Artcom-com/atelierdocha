@@ -1,5 +1,7 @@
 import { MongoServerError } from 'mongodb';
-import { badRequest, HttpResponse, notFound } from '../helpers/http';
+import {
+  badRequest, HttpResponse, notFound, unauthorized,
+} from '../helpers/http';
 import { HttpErrors } from './HttpErrors';
 
 const handleErrors = (error: Error): HttpResponse | undefined => {
@@ -9,6 +11,10 @@ const handleErrors = (error: Error): HttpResponse | undefined => {
 
   if (error instanceof HttpErrors.BadRequest) {
     return badRequest(error);
+  }
+
+  if (error instanceof HttpErrors.Unauthorized) {
+    return unauthorized(error);
   }
 
   if (error instanceof MongoServerError) {

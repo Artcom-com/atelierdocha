@@ -40,5 +40,6 @@ module.exports = {
     'class-methods-use-this': 'off',
     '@typescript-eslint/no-namespace': 'off',
     'max-len': 'off',
+    'no-console': 'off',
   },
 };

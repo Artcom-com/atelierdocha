@@ -1,10 +1,11 @@
+import { NextApiRequest } from 'next';
 import { validateEmail, validationField } from '../../src/utils/validations';
 import { ProductModel } from '../data/model/ProductModel';
 import { UserModel } from '../data/model/UserModel';
 import { HttpErrors } from '../errors/HttpErrors';
 
 export default class Validations {
-  validtionInfo(info: unknown | undefined) {
+  validationInfo(info: unknown | undefined) {
     if (info === undefined || info === '') {
       throw new HttpErrors.BadRequest('Não foi possível obter nada com os dados enviados.');
     }
@@ -41,6 +42,18 @@ export default class Validations {
 
     if (!validateEmail(email)) {
       throw new HttpErrors.BadRequest('E-mail inválido.');
+    }
+  }
+
+  validationAuthToken(token: string) {
+    if (!token) {
+      throw new HttpErrors.Unauthorized('Ação inválida. Necessário login.');
+    }
+  }
+
+  containsAuthToken(req: NextApiRequest) {
+    if (req.headers?.authorization === undefined) {
+      throw new HttpErrors.Unauthorized('Por favor, faça login para ter acesso!');
     }
   }
 }

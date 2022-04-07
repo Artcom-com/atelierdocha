@@ -68,7 +68,7 @@ export default class TokenController {
     try {
       const { token }: { [key: string]: string } = req.body;
 
-      this.validations.validtionInfo(token);
+      this.validations.validationInfo(token);
 
       const result = this.webToken.verify(token);
 

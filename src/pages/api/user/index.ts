@@ -2,8 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import connect from '../../../../backend/data/mongodb/mongodb';
 import makeUserController from '../../../../backend/factory/makeUserController';
 import { HttpResponse } from '../../../../backend/helpers/http';
+import withProtect from '../../../../backend/middlewares/withProtect';
 
-export default async function handlerLogin(
+async function handlerCreateUser(
   req: NextApiRequest,
   res: NextApiResponse<Partial<HttpResponse>>,
 ) {
@@ -20,3 +21,5 @@ export default async function handlerLogin(
   const { message } = response;
   return res.status(response.statusCode).json({ message });
 }
+
+export default withProtect(handlerCreateUser);

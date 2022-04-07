@@ -30,7 +30,7 @@ export default class ProductController {
     try {
       const { id } = req.query;
 
-      this.validations.validtionInfo(id);
+      this.validations.validationInfo(id);
 
       const product = await this.repository.findById(id as string);
       this.validations.checkIfExists(product, 'Produto');
@@ -53,7 +53,7 @@ export default class ProductController {
       const { name, price } = fields;
 
       this.validations.validateProduct({ imagePresentationUrl, name, price });
-      this.validations.validtionInfo(imagePresentationUrl);
+      this.validations.validationInfo(imagePresentationUrl);
 
       await this.repository.add({ imagePresentationUrl, name, price });
       return created('Produto criado com sucesso!');
@@ -70,7 +70,7 @@ export default class ProductController {
   async delete(req: NextApiRequest):Promise<HttpResponse> {
     try {
       const { id } = req.query;
-      this.validations.validtionInfo(id);
+      this.validations.validationInfo(id);
       const product = await this.repository.findById(String(id));
       this.validations.checkIfExists(product, 'Produto');
       await this.imageHandle.delete(product.imagePresentationUrl);
@@ -107,7 +107,7 @@ export default class ProductController {
   async update(req: NextApiRequest): Promise<HttpResponse> {
     try {
       const { id } = req.query;
-      this.validations.validtionInfo(id);
+      this.validations.validationInfo(id);
       const { fields, filepath } = await this.formHandle.handleForm(req);
 
       // eslint-disable-next-line max-len
@@ -128,8 +128,8 @@ export default class ProductController {
     try {
       const { id } = req.query;
       const { pinned } = req.body;
-      this.validations.validtionInfo(id);
-      this.validations.validtionInfo(pinned);
+      this.validations.validationInfo(id);
+      this.validations.validationInfo(pinned);
       await this.repository.update(String(id), { pinned: (pinned as boolean) });
       if (pinned === false) {
         return ok('Produto foi fixado no da primeira página.');
@@ -148,7 +148,7 @@ export default class ProductController {
   async pagination(req: NextApiRequest): Promise<HttpResponse> {
     try {
       const { page } = req.query;
-      this.validations.validtionInfo(page);
+      this.validations.validationInfo(page);
       const products = await this.repository.pagination(Number(page));
 
       return okWithContent(products);
