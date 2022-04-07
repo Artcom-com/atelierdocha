@@ -246,6 +246,7 @@ const Footer = (): JSX.Element => {
             href="https://www.artcom.com.br/"
             rel="noopener noreferrer"
             target="_blank"
+            style={{ textDecoration: 'underline' }}
           >
             Artcom Comnunicações.
           </a>
