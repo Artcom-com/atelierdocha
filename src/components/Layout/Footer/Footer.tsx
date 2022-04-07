@@ -97,6 +97,10 @@ const Footer = (): JSX.Element => {
             color="#fff"
             textAlign={{ base: 'center', xl: 'left' }}
             mt={{ base: '1.5em', md: '0' }}
+            as="a"
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://www.google.com.br/maps/place/Atelier+do+Ch%C3%A1/@-20.3073248,-40.314686,17z/data=!3m1!4b1!4m5!3m4!1s0xb83d6334503a8b:0xa520f339df5b2c39!8m2!3d-20.3073298!4d-40.3124973"
           >
             Rua Joaquim Leopodilno Lopes, nº 370
             <br />
@@ -104,33 +108,34 @@ const Footer = (): JSX.Element => {
             <br />
             Cep: 29045-580
           </Text>
-
-          <Flex
-            justifyContent={{ base: 'flex-start', md: 'center', xl: 'flex-start' }}
-            gap={6}
-            mb={{ base: '1.8em', xl: '0' }}
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://api.whatsapp.com/send?phone=5527988689325&text=Ol%C3%A1%2C%20gostaria%20saber%20mais%20dos%20seus%20produtos."
           >
-            <Image
-              src="/images/svgs/whatsapp-2.svg"
-              w={{ base: '40px', xl: '50px' }}
-              h={{ base: '40px', xl: '50px' }}
-              alt="Whatsapp logo"
-            />
-
-            <Text
-              fontSize={{ base: '1.5em', xl: '2em' }}
-              color="#fff"
-              fontWeight="700"
-              as="a"
-              rel="noopener noreferrer"
-              target="_blank"
-              href="https://api.whatsapp.com/send?phone=5527988689325&text=Ol%C3%A1%2C%20gostaria%20saber%20mais%20dos%20seus%20produtos."
+            <Flex
+              justifyContent={{ base: 'flex-start', md: 'center', xl: 'flex-start' }}
+              gap={6}
+              mb={{ base: '1.8em', xl: '0' }}
             >
+              <Image
+                src="/images/svgs/whatsapp-2.svg"
+                w={{ base: '40px', xl: '50px' }}
+                h={{ base: '40px', xl: '50px' }}
+                alt="Whatsapp logo"
+              />
 
-              (27) 98868-9325
+              <Text
+                fontSize={{ base: '1.5em', xl: '2em' }}
+                color="#fff"
+                fontWeight="700"
+              >
 
-            </Text>
-          </Flex>
+                (27) 98868-9325
+
+              </Text>
+            </Flex>
+          </a>
         </Flex>
 
         <Flex
@@ -138,86 +143,94 @@ const Footer = (): JSX.Element => {
           gap={4}
           ml={{ base: '0', md: '2em' }}
         >
-          <Flex
-            alignItems="center"
-            gap={6}
-            justifyContent={{ base: 'flex-start', md: 'center', xl: 'flex-start' }}
+          <a
+            href="mailto:sac@atelierdocha.com"
+            rel="noopener noreferrer"
+            target="_blank"
           >
-            <Image
-              src="/images/svgs/email.svg"
-              w={{ base: '40px', xl: '50px' }}
-              h={{ base: '40px', xl: '50px' }}
-              alt="Email logo"
-            />
 
-            <Text
-              fontSize={{ base: '1.5em', xl: '2em' }}
-              color="#fff"
-              fontWeight="700"
-              as="a"
-              href="mailto:sac@atelierdocha.com"
-              rel="noopener noreferrer"
-              target="_blank"
+            <Flex
+              alignItems="center"
+              gap={6}
+              justifyContent={{ base: 'flex-start', md: 'center', xl: 'flex-start' }}
             >
+              <Image
+                src="/images/svgs/email.svg"
+                w={{ base: '40px', xl: '50px' }}
+                h={{ base: '40px', xl: '50px' }}
+                alt="Email logo"
+              />
 
-              sac@atelierdocha.com
+              <Text
+                fontSize={{ base: '1.5em', xl: '2em' }}
+                color="#fff"
+                fontWeight="700"
+              >
 
-            </Text>
-          </Flex>
+                sac@atelierdocha.com
 
-          <Flex
-            alignItems="center"
-            gap={6}
-            justifyContent={{ base: 'flex-start', md: 'center', xl: 'flex-start' }}
+              </Text>
+            </Flex>
+          </a>
+
+          <a
+            href="https://www.instagram.com/atelierdocha/"
+            rel="noopener noreferrer"
+            target="_blank"
           >
-            <Image
-              src="/images/svgs/instagram.svg"
-              w={{ base: '40px', xl: '50px' }}
-              h={{ base: '40px', xl: '50px' }}
-              alt="Whatsapp logo"
-            />
 
-            <Text
-              fontSize={{ base: '1.5em', xl: '2em' }}
-              color="#fff"
-              fontWeight="700"
-              as="a"
-              href="https://www.instagram.com/atelierdocha/"
-              rel="noopener noreferrer"
-              target="_blank"
+            <Flex
+              alignItems="center"
+              gap={6}
+              justifyContent={{ base: 'flex-start', md: 'center', xl: 'flex-start' }}
             >
+              <Image
+                src="/images/svgs/instagram.svg"
+                w={{ base: '40px', xl: '50px' }}
+                h={{ base: '40px', xl: '50px' }}
+                alt="Whatsapp logo"
+              />
 
-              @atelierdocha
+              <Text
+                fontSize={{ base: '1.5em', xl: '2em' }}
+                color="#fff"
+                fontWeight="700"
+              >
 
-            </Text>
-          </Flex>
+                @atelierdocha
 
-          <Flex
-            alignItems="center"
-            gap={6}
-            justifyContent={{ base: 'flex-start', md: 'center', xl: 'flex-start' }}
+              </Text>
+            </Flex>
+          </a>
+          <a
+            href="https://pt-br.facebook.com/atelierdochabr/"
+            rel="noopener noreferrer"
+            target="_blank"
           >
-            <Image
-              src="/images/svgs/facebook.svg"
-              w={{ base: '40px', xl: '50px' }}
-              h={{ base: '40px', xl: '50px' }}
-              alt="Facebook logo"
-            />
 
-            <Text
-              fontSize={{ base: '1.5em', xl: '2em' }}
-              color="#fff"
-              fontWeight="700"
-              as="a"
-              href="https://pt-br.facebook.com/atelierdochabr/"
-              rel="noopener noreferrer"
-              target="_blank"
+            <Flex
+              alignItems="center"
+              gap={6}
+              justifyContent={{ base: 'flex-start', md: 'center', xl: 'flex-start' }}
             >
+              <Image
+                src="/images/svgs/facebook.svg"
+                w={{ base: '40px', xl: '50px' }}
+                h={{ base: '40px', xl: '50px' }}
+                alt="Facebook logo"
+              />
 
-              atelierdocha
+              <Text
+                fontSize={{ base: '1.5em', xl: '2em' }}
+                color="#fff"
+                fontWeight="700"
+              >
 
-            </Text>
-          </Flex>
+                atelierdocha
+
+              </Text>
+            </Flex>
+          </a>
         </Flex>
       </Grid>
       <Flex
