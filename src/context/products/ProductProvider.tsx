@@ -13,6 +13,7 @@ export default function ProductProvider({ children }: ProductsProviderProps): JS
     pinnedList: [],
     productList: [],
     productsInCurrentPage: [],
+    findProductsByName: [],
   });
 
   const handleAddProducts = (products: ProductModel[]) => {
@@ -43,15 +44,32 @@ export default function ProductProvider({ children }: ProductsProviderProps): JS
     });
   };
 
+  const handleFindProductsByName = (products: ProductModel[] | ProductModel): void => {
+    dispatchProductActions({
+      type: 'FIND_BY_NAME',
+      findProductsByName: products,
+    });
+  };
+
+  const handleClearFindByNameList = (): void => {
+    dispatchProductActions({
+      type: 'CLEAR_FIND_BY_NAME_LIST',
+      findProductsByName: [],
+    });
+  };
+
   const context: ProductContextType = useMemo(() => ({
     hasChanged: productsState.hasChanged,
     productList: productsState.productList,
     productsInCurrentPage: productsState.productsInCurrentPage,
     pinnedList: productsState.pinnedList,
+    findProductsByName: productsState.findProductsByName,
     handleAddProducts,
     handleDeleteProduct,
     handleAddProductsInCurrentPage,
     handlePinProduct,
+    handleFindProductsByName,
+    handleClearFindByNameList,
   }), [productsState]);
 
   return (

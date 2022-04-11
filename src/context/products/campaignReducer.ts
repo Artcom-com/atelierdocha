@@ -6,14 +6,16 @@ export interface State {
   pinnedList: string[]
   productList: ProductModel[]
   productsInCurrentPage: ProductModel[]
+  findProductsByName: ProductModel[]
 }
 
 export interface Actions {
-  type: 'ADD_PRODUCTS' | 'DELETE_PRODUCT' | 'ADD_PRODUCTS_IN_CURRENT_PAGE' | 'HANDLE_PIN_PRODUCT'
+  type: 'ADD_PRODUCTS' | 'DELETE_PRODUCT' | 'ADD_PRODUCTS_IN_CURRENT_PAGE' | 'HANDLE_PIN_PRODUCT' | 'FIND_BY_NAME' | 'CLEAR_FIND_BY_NAME_LIST'
   productList?: ProductModel[]
   productDeleteIndex?: string
   productsInCurrentPage?: ProductModel[]
   productPinId?: string
+  findProductsByName?: ProductModel[] | ProductModel
 }
 
 const productReducer = (state: State, actions: Actions): State => {
@@ -24,6 +26,7 @@ const productReducer = (state: State, actions: Actions): State => {
         productList: [...state.productList, ...actions.productList],
         productsInCurrentPage: state.productsInCurrentPage,
         pinnedList: state.pinnedList,
+        findProductsByName: state.findProductsByName,
       };
     }
     if (actions.productList !== undefined) {
@@ -32,6 +35,7 @@ const productReducer = (state: State, actions: Actions): State => {
         productList: [...state.productList, actions.productList],
         productsInCurrentPage: state.productsInCurrentPage,
         pinnedList: state.pinnedList,
+        findProductsByName: state.findProductsByName,
       };
     }
   }
@@ -69,6 +73,7 @@ const productReducer = (state: State, actions: Actions): State => {
       productList: [...state.productList],
       productsInCurrentPage: [...state.productsInCurrentPage],
       pinnedList: state.pinnedList,
+      findProductsByName: state.findProductsByName,
     };
   }
 
@@ -79,6 +84,7 @@ const productReducer = (state: State, actions: Actions): State => {
         productList: state.productList,
         productsInCurrentPage: [...actions.productsInCurrentPage],
         pinnedList: state.pinnedList,
+        findProductsByName: state.findProductsByName,
       };
     }
   }
@@ -90,7 +96,6 @@ const productReducer = (state: State, actions: Actions): State => {
       if (productId > -1) {
         state.pinnedList.splice(productId, 1);
       } else {
-        console.log('entrar');
         state.pinnedList.push(actions.productPinId);
       }
 
@@ -99,8 +104,40 @@ const productReducer = (state: State, actions: Actions): State => {
         productList: [...state.productList],
         productsInCurrentPage: [...state.productsInCurrentPage],
         pinnedList: [...state.pinnedList],
+        findProductsByName: state.findProductsByName,
       };
     }
+  }
+
+  if (actions.type === 'FIND_BY_NAME') {
+    if (Array.isArray(actions.findProductsByName)) {
+      return {
+        hasChanged: state.hasChanged,
+        productList: state.productList,
+        productsInCurrentPage: state.productsInCurrentPage,
+        pinnedList: state.pinnedList,
+        findProductsByName: [...state.findProductsByName, ...actions.findProductsByName],
+      };
+    }
+    if (actions.findProductsByName !== undefined) {
+      return {
+        hasChanged: state.hasChanged,
+        productList: state.productList,
+        productsInCurrentPage: state.productsInCurrentPage,
+        pinnedList: state.pinnedList,
+        findProductsByName: [...state.findProductsByName, actions.findProductsByName],
+      };
+    }
+  }
+
+  if (actions.type === 'CLEAR_FIND_BY_NAME_LIST') {
+    return {
+      hasChanged: state.hasChanged,
+      productList: state.productList,
+      productsInCurrentPage: state.productsInCurrentPage,
+      pinnedList: state.pinnedList,
+      findProductsByName: [],
+    };
   }
 
   return {
@@ -108,6 +145,7 @@ const productReducer = (state: State, actions: Actions): State => {
     productList: [],
     productsInCurrentPage: [],
     pinnedList: [],
+    findProductsByName: [],
   };
 };
 

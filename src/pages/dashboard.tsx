@@ -13,6 +13,7 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { ProductModel } from '../../backend/data/model/ProductModel';
 import DashButtons from '../components/Layout/Dashboard/DashButtons';
 import Header from '../components/Layout/Dashboard/Header';
+import SearchBar from '../components/Layout/SearchBar/SearchBar';
 import SEO from '../components/SEO';
 import ProductContext from '../context/products/ProductContext';
 import api from '../services/fetchAPI/init';
@@ -26,6 +27,7 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
   const productsCtx = useContext(ProductContext);
   const [currentProducts, setRenderCurrentProducts] = useState<ProductModel[]>(products);
   const [currentPage, setCurrentPage] = useState<number>(0);
+  const [renderSearchProductsList, setRenderSearchProductsList] = useState<ProductModel[]>([]);
   const { push } = useRouter();
   const toast = useToast();
 
@@ -46,6 +48,13 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
     };
     handleSetCurrentProducts();
   }, [productsCtx.productsInCurrentPage]);
+
+  useEffect(() => {
+    const handleSetSearchProductsList = () => {
+      setRenderSearchProductsList(productsCtx.findProductsByName);
+    };
+    handleSetSearchProductsList();
+  }, [productsCtx.findProductsByName]);
 
   const handlePassNextPage = async (): Promise<void> => {
     const response = await api.get(`products/pagination/${currentPage + 1}`);
@@ -85,6 +94,7 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
       <SEO title="Dashboard | Atelier do Chá" description="Dashboard page" />
       <Header />
       <Flex w="100%" h="80vh" mt="6em" alignItems="center" justifyContent="center" flexDir="column">
+        <SearchBar />
         <Grid
           templateRows="repeat(1, 1fr)"
           templateColumns="15% 80%"
@@ -125,7 +135,28 @@ const Dashboard: NextPage<DashboardProps> = ({ products }) => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {currentProducts.map((product) => (
+                  {renderSearchProductsList.length <= 0 && currentProducts.map((product) => (
+                    <Tr color="#fff" key={product.name + product.id} border="2px solid #fff" bg="#789341">
+                      <Td border="2px solid #fff" bg="#789341" alignItems="center">
+                        <Box position="relative" w="100%" h="100px">
+                          <Image
+                            objectFit="fill"
+                            layout="fill"
+                            src={`${product.imagePresentationUrl}`}
+                            alt="Product Image"
+                          />
+                        </Box>
+                      </Td>
+                      <Td textAlign="center" border="2px solid #fff" bg="#789341">{product.name}</Td>
+                      <Td textAlign="center" border="2px solid #fff" bg="#789341">{product.price}</Td>
+                      <Td textAlign="center" border="2px solid #fff" bg="#789341">{productsCtx.pinnedList.indexOf(product.id as string) > -1 ? 'Fixado' : 'Não fixado'}</Td>
+                      <Td textAlign="center" border="2px solid #fff" bg="#789341">
+                        <DashButtons id={product.id as string} pinned={productsCtx.pinnedList.indexOf(product.id as string) > -1} />
+                      </Td>
+                    </Tr>
+                  ))}
+
+                  {renderSearchProductsList.length > 0 && renderSearchProductsList.map((product) => (
                     <Tr color="#fff" key={product.name + product.id} border="2px solid #fff" bg="#789341">
                       <Td border="2px solid #fff" bg="#789341" alignItems="center">
                         <Box position="relative" w="100%" h="100px">

@@ -45,6 +45,25 @@ export default class ProductController {
     }
   }
 
+  async findByName(req: NextApiRequest): Promise<HttpResponse> {
+    try {
+      const { name } = req.body;
+
+      this.validations.validationInfo(name);
+
+      const product = await this.repository.findByName(name as string);
+      this.validations.checkIfExists(product, 'Produto');
+
+      return okWithContent(product);
+    } catch (err) {
+      const error = handleErrors(err as Error);
+      if (error !== undefined) {
+        return error;
+      }
+      return serverError('Erro de servidor. Se persistir, contate um responsável.');
+    }
+  }
+
   async add(req: NextApiRequest): Promise<HttpResponse> {
     try {
       const { fields, filepath } = await this.formHandle.handleForm(req);

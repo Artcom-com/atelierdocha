@@ -35,6 +35,18 @@ export default class ProductRepository implements ProductCases {
     return products[0];
   }
 
+  async findByName(name: string): Promise<ProductModel[]> {
+    await this.checkIfDBIsConnected();
+
+    const products = await (this.db as Db).collection<ProductModel>('products').find({ name }, {
+      projection: {
+        imagePresentationUrl: 1, name: 1, price: 1, pinned: 1, id: '$_id',
+      },
+    }).toArray();
+
+    return products;
+  }
+
   async findPinneds(): Promise<ProductModel[]> {
     await this.checkIfDBIsConnected();
 
