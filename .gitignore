@@ -36,3 +36,4 @@ yarn-error.log*
 
 .env
 **/test.ts
+nodesource_setup.sh
