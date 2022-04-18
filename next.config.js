@@ -12,7 +12,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://www.atelierdocha.com/api/:path*',
+        destination: 'https://www.atelierdocha.com/',
       },
     ];
   },
