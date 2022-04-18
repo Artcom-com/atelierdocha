@@ -240,16 +240,7 @@ const Footer = (): JSX.Element => {
         w="full"
       >
         <Text color="#fff" textAlign="center" w="100%">
-          2022 - Atelier do Chá. Todos os direitos reservados. Desenvolvido por
-          {' '}
-          <a
-            href="https://www.artcom.com.br/"
-            rel="noopener noreferrer"
-            target="_blank"
-            style={{ textDecoration: 'underline' }}
-          >
-            Artcom Comnunicações.
-          </a>
+          2022 - Atelier do Chá. Todos os direitos reservados. Desenvolvido por Atelier do Chá
         </Text>
       </Flex>
     </Flex>
