@@ -49,7 +49,7 @@ export default function AuthProvider({ children }: AuthProviderProps): JSX.Eleme
   }, []);
 
   const signIn = async ({ email, password }: LoginProps): Promise<boolean> => {
-    const response = await api.post('/user/login', {
+    const response = await api.post('user/login', {
       email,
       password,
     });
