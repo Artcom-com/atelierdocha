@@ -90,7 +90,7 @@ const Home = (): JSX.Element => {
           >
             ENTRAMOS EM
             <br />
-            <span style={{ fontWeight: 900 }}>CONTACO</span>
+            <span style={{ fontWeight: 900 }}>CONTATO</span>
             {' '}
             COM
             <br />
