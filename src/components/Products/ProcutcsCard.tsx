@@ -62,7 +62,7 @@ const ProductsCard = ({ imagePath, title, value }: ProductsCardProps): JSX.Eleme
             fontWeight="900"
             fontSize="2em"
           >
-            {value}
+            {`${Number(value).toFixed(2)}`.replace('.', ',')}
           </Text>
         </Flex>
       </Flex>
