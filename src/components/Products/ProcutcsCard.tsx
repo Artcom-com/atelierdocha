@@ -15,59 +15,67 @@ const ProductsCard = ({ imagePath, title, value }: ProductsCardProps): JSX.Eleme
   <Flex
     flexDir="column"
     alignItems="center"
+    h="415px"
   >
-    <Box
-      position="relative"
-      w={{ base: '150px', xl: '200px' }}
-      h={{ base: '150px', xl: '200px' }}
-    >
-      <Image
-        src={imagePath}
-        alt="Conceptual Tea Image"
-        layout="fill"
-        objectFit="fill"
-      />
-    </Box>
-    <div className={classes['border-bottom']} />
     <Flex
       flexDir="column"
+      alignItems="center"
     >
-      <Text
-        color="#6b5f00"
-        fontSize={{ base: '1em', xl: '1.5em' }}
-        textAlign="center"
+      <Box
+        position="relative"
+        w={{ base: '150px', xl: '200px' }}
+        h={{ base: '150px', xl: '200px' }}
       >
-        {title}
-      </Text>
+        <Image
+          src={imagePath}
+          alt="Conceptual Tea Image"
+          layout="fill"
+          objectFit="fill"
+        />
+      </Box>
+      <div className={classes['border-bottom']} />
       <Flex
-        justifyContent="center"
+        flexDir="column"
       >
+        <Text
+          color="#6b5f00"
+          fontSize={{ base: '1em', xl: '1.5em' }}
+          textAlign="center"
+        >
+          {title}
+        </Text>
+        <Flex
+          justifyContent="center"
+        >
 
-        <Flex
-          alignItems="end"
-        >
-          <Text
-            color="#6b5f00"
-            fontSize="1.5em"
-            verticalAlign="middle"
+          <Flex
+            alignItems="end"
           >
-            R$
-          </Text>
-        </Flex>
-        <Flex
-          alignItems="end"
-        >
-          <Text
-            color="#6b5f00"
-            fontWeight="900"
-            fontSize="2em"
+            <Text
+              color="#6b5f00"
+              fontSize="1.5em"
+              verticalAlign="middle"
+            >
+              R$
+            </Text>
+          </Flex>
+          <Flex
+            alignItems="end"
           >
-            {`${Number(value).toFixed(2)}`.replace('.', ',')}
-          </Text>
+            <Text
+              color="#6b5f00"
+              fontWeight="900"
+              fontSize="2em"
+            >
+              {`${Number(value).toFixed(2)}`.replace('.', ',')}
+            </Text>
+          </Flex>
         </Flex>
       </Flex>
     </Flex>
-    <BuyButton whatsMessage={`Olá, gostaria de saber mais sobre o produto ${title} e de valor R$ ${value}.`} />
+    <Flex h="100%" alignItems="flex-end">
+      <BuyButton whatsMessage={`Olá, gostaria de saber mais sobre o produto ${title} e de valor R$ ${value}.`} />
+    </Flex>
   </Flex>
 );
 
